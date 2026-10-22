@@ -44,3 +44,4 @@
 - 手動試預覽區：點維基百科連結會在小框裡開啟維基百科，按「重設」後回到原本的程式；表單按送出，Chrome 在預覽框的 console 印出 "Blocked form submission … 'allow-forms' permission is not set"，畫面不變，跟文章說明一致。
 - 看深色截圖發現程式碼字型把 `<!--` `-->` 畫成箭頭，關掉連字後重截，顯示為原本的字元。
 - 測試本身修了一處：預覽 iframe 是 sandbox、不同源，外層讀不到 `contentDocument`，改用 Playwright 的 frameLocator 讀。
+- 推送 5cc75b0 後約 30 秒 Pages 重建完成，第 3 章網址回 200；同一套測試直接打 https://johnshaw77.github.io/ai-tutorial/ ：66/66 通過。
