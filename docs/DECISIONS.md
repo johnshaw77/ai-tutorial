@@ -24,3 +24,12 @@
 - **表單的「必填」提醒改到練習裡試**：預覽 iframe 只有 `allow-scripts`，Chrome 會先擋下送出、不跑必填檢查，所以文章明講預覽區按送出沒反應，加分題再用自己的檔案試 `required`。不為此開 `allow-forms`：開了以後送出會讓預覽區跳到空白頁，反而更難懂。
 - **預覽區點連結會在小框裡開啟外部網站**：維持現狀，文章說明改一個字或按「重設」就能回來。
 - **AI 產生的頁面另存新檔**（例如 `ai-test.html`），不貼進 `index.html`，避免蓋掉讀者自己寫的自我介紹頁。
+
+## 2026-10-22 第 4 章
+
+- **CSS 只教 `px`**，不教 `em`／`rem`／`%`。例外是圖片的 `max-width: 100%` 和圓形大頭照的 `border-radius: 50%`，文中標明「照抄即可」。
+- **字型統一寫 `"Microsoft JhengHei", "PingFang TC", sans-serif`**：不外連網路字型，Windows 和 Mac 各有內建的中文字可用。
+- **新手樣式用 class，不用 id**：id 留給第 5 章的 JavaScript；整頁共通設定（`body`、`a`、`button`）才用標籤選取器。
+- **Flexbox 只教四個屬性**（`display: flex`、`gap`、`justify-content`、`align-items`），不教 grid。
+- **試試看裡用色塊代替大頭照**：預覽框放不了讀者的圖片，用圓形 `div` 示範圓角與並排。
+- **「CSS 寫在哪裡」的三張卡不放程式碼**：一長串程式碼在窄卡片裡會斷成好幾行，改放白話說明，程式碼放在下面各自的小節。

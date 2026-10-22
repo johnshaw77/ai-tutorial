@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1280">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A7%A9%3C/text%3E%3C/svg%3E">
+  <title>CSS：網頁的衣服｜AI Web 開發入門</title>
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body data-page="basics/04-css" data-root="../">
+  <div class="layout">
+    <nav class="sidebar" id="sidebar" aria-label="課程目錄"></nav>   <!-- site.js 填入 -->
+    <main class="content">
+      <header class="page-header">
+        <p class="eyebrow">網頁基礎 · 第 4 章</p>
+        <h1>CSS：網頁的衣服</h1>
+        <p class="lead">HTML 決定網頁上有什麼，CSS 決定它們看起來的樣子：顏色、字、留白和排版。這一章學會幫網頁「穿衣服」，把你的自我介紹頁變成一張好看的卡片。</p>
+        <p class="meta"><span>閱讀 40 分</span><span>練習 40 分</span></p>
+      </header>
+
+      <section class="goals">
+        <h2>學完這篇，你會</h2>
+        <ul>
+          <li>知道 CSS 寫在哪裡，看得懂「選取器 { 屬性: 值; }」這種規則。</li>
+          <li>會用 class 替指定的元素改顏色、字型、背景和邊框。</li>
+          <li>理解 padding、border、margin 的差別，能把內容置中、用 flex 排成一排。</li>
+          <li>會用開發者工具試改 CSS，並請 AI 一次只改一件事。</li>
+        </ul>
+      </section>
+
+      <article class="article">
+        <h2>CSS 是什麼？</h2>
+        <p>第 1 章用過一個比喻：HTML 是<strong>骨架</strong>，決定頁面上有哪些東西：標題、段落、圖片。CSS 則是<strong>衣服</strong>，決定這些東西看起來是什麼樣子：顏色、大小、位置、間距。</p>
+        <p>同一份 HTML，換一套 CSS，看起來可以完全不同。以第 3 章的自我介紹頁為例：</p>
+        <div class="cards">
+          <div class="card">
+            <p class="card-icon">📄</p>
+            <h3>樸素版</h3>
+            <p>黑色的字、白色的底，所有東西從左上角一路排下來。內容都在，只是沒有打扮。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">🎨</p>
+            <h3>有顏色版</h3>
+            <p>標題變成藍色，段落的字變大，整頁看起來有了重點。骨架一樣，只是換了顏色和字級。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">✨</p>
+            <h3>卡片置中版</h3>
+            <p>內容放進白色的卡片裡，整個置中，背景是淡淡的灰色。骨架還是同一份。</p>
+          </div>
+        </div>
+        <p>本章會教三件事：改顏色與字、留空間、排版置中。最後，我們會幫第 3 章的自我介紹頁換上一套新衣服。</p>
+
+        <h2>CSS 寫在哪裡</h2>
+        <p>CSS 可以寫在三個地方：</p>
+        <div class="cards">
+          <div class="card">
+            <p class="card-icon">①</p>
+            <h3>style 屬性</h3>
+            <p>直接寫在標籤上，只影響那一個元素。不建議，但要認得。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">②</p>
+            <h3>style 標籤</h3>
+            <p>寫在 <code>head</code> 裡，只影響這一頁。本章的試試看都用這種。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">③</p>
+            <h3>獨立的 style.css</h3>
+            <p>另存成一個檔案，很多網頁可以共用。最推薦。</p>
+          </div>
+        </div>
+
+        <h3>style 屬性：寫在標籤上（不建議）</h3>
+        <p>把 <code>style</code> 屬性直接寫在標籤裡，它只影響這一個元素。</p>
+        <pre><code class="language-html">&lt;p style="color: #2563eb;"&gt;這段是藍色的。&lt;/p&gt;</code></pre>
+        <p>這種寫法的問題是：每個標籤都要自己寫一次。想把全部的段落改成別的顏色，就得一個一個找、一個一個改，很麻煩。不過請 AI 幫忙寫網頁時，它有時會用這種寫法，所以看到的時候要認得它。</p>
+
+        <h3>style 標籤：寫在 head 裡（本章的試試看都用這種）</h3>
+        <p>把 CSS 放在 <code>head</code> 裡的 <code>&lt;style&gt;</code> 標籤中間。它只影響這一頁。本章的「試試看」都用這種寫法，因為試試看只有一個檔案。</p>
+        <pre><code class="language-html">&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;我的小網頁&lt;/title&gt;
+    &lt;style&gt;
+        p {
+            color: #2563eb;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+
+        <h3>獨立的 style.css：推薦</h3>
+        <p>把 CSS 另外存成一個檔案，檔名叫 <code>style.css</code>，放在作品資料夾 <code>my-first-web/</code> 裡。這是最推薦的寫法，因為多個網頁可以共用同一件「衣服」。改一次 <code>style.css</code>，所有接上它的網頁都會跟著變。</p>
+        <p>接的方式，是在 head 裡、<code>title</code> 下面加一行 <code>link</code>：</p>
+        <pre><code class="language-html">&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;王小明的自我介紹&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+        <p><code>href</code> 和第 3 章的連結一樣，是相對路徑。意思是從 <code>index.html</code> 出發，往旁邊找到 <code>style.css</code>。兩個檔案放在同一個資料夾裡，所以只要寫檔名就好。</p>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>寫了 <code>link</code>，但樣式沒有出現，常見的原因有三個：</p>
+          <ul>
+            <li>檔名打錯。<code>style.css</code> 和 <code>styles.css</code> 是不同的檔案。</li>
+            <li>檔案不在同一個資料夾。<code>style.css</code> 要和 <code>index.html</code> 放在一起。</li>
+            <li>忘了存檔。在 VS Code 按 <kbd>Ctrl</kbd> + <kbd>S</kbd>（Mac 是 <kbd>⌘</kbd> + <kbd>S</kbd>），再重新整理瀏覽器。</li>
+          </ul>
+        </div>
+
+        <h2>一條規則的長相</h2>
+        <p>CSS 的基本單位叫做<strong>規則（rule）</strong>。先看一個例子。這條規則會讓所有段落變成藍色，字也會變大：</p>
+        <pre><code class="language-css">p {
+    color: #2563eb;
+    font-size: 18px;
+}</code></pre>
+        <p>這條規則可以拆成三個部分，用三張卡片來看：</p>
+        <div class="cards">
+          <div class="card">
+            <p class="card-icon">①</p>
+            <h3>選取器</h3>
+            <p>要穿衣服的是誰。上面的 <code>p</code> 代表「所有的段落」。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">②</p>
+            <h3>屬性</h3>
+            <p>要改什麼。<code>color</code> 是文字的顏色，<code>font-size</code> 是文字的大小。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">③</p>
+            <h3>值</h3>
+            <p>改成什麼。<code>#2563eb</code> 是一種藍色，<code>18px</code> 是 18 像素。</p>
+          </div>
+        </div>
+        <p>再看符號的角色：</p>
+        <ul>
+          <li><strong>大括號</strong> <code>{ }</code>：把這條規則的內容包起來，像標籤把內容包起來一樣。</li>
+          <li><strong>冒號</strong> <code>:</code>：分開「屬性」和「值」。左邊是屬性，右邊是值。</li>
+          <li><strong>分號</strong> <code>;</code>：放在每一行的最後，表示這一行結束。</li>
+        </ul>
+        <p>一個規則可以有很多行「屬性: 值;」。一行寫一個屬性，比擠在同一行好讀。</p>
+        <div class="callout note">
+          <p class="callout-title">補充</p>
+          <p>第 3 章學過 HTML 的<strong>屬性</strong>（attribute），例如 <code>href</code>、<code>src</code>。CSS 的<strong>屬性</strong>（property），例如 <code>color</code>，是另一回事。兩者中文都叫「屬性」，但 HTML 的屬性是標籤裡的補充資料，CSS 的屬性是規則裡要改的項目。看到的時候分清楚就好。</p>
+        </div>
+
+        <h3>認識色碼</h3>
+        <p><code>#2563eb</code> 這種寫法叫做<strong>色碼</strong>。開頭的 <code>#</code> 後面接六個字，可以是數字或英文字母。每兩個字代表紅、綠、藍三種光的多寡。這些你不用背，也不用算。在 VS Code 裡，寫色碼時旁邊會出現一個小色塊。點一下它，就能用調色盤挑顏色，挑好後 VS Code 會自動換成色碼。</p>
+
+        <h3>CSS 的註解</h3>
+        <p>CSS 的註解寫成 <code>/* … */</code>，和 HTML 的 <code>&lt;!-- --&gt;</code> 不一樣。</p>
+        <pre><code class="language-css">/* 這是 CSS 的註解：段落用藍色 */
+p {
+    color: #2563eb;
+}</code></pre>
+
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>CSS 最麻煩的地方，是寫錯了它不會報錯，整條規則只是悄悄地不生效。最常見的有三種：</p>
+          <ul>
+            <li>用中文輸入法打出全形的符號：冒號「：」、分號「；」、大括號「｛｝」。看起來和半形一樣，但 CSS 不認得，整條規則就會失效。</li>
+            <li>漏掉分號。少了分號，下一行也會跟著一起失效。</li>
+            <li>屬性名稱拼錯，例如把 <code>color</code> 寫成 <code>colour</code>。</li>
+          </ul>
+          <p>建議寫 CSS 時，把輸入法切換成英文。遇到樣式沒有生效，先檢查這三件事。</p>
+        </div>
+
+        <h2>選取器：決定誰要穿這件衣服</h2>
+        <p>規則最前面的那個字，叫做<strong>選取器（selector）</strong>。它決定這條規則要套用到哪些元素。最基本的選取器有三種。</p>
+
+        <h3>標籤選取器：所有的 p</h3>
+        <p>直接寫標籤的名稱，例如 <code>p</code>、<code>h1</code>。這樣整頁所有這種標籤都會套用到。</p>
+        <pre><code class="language-css">p {
+    color: #2563eb;
+}</code></pre>
+
+        <h3>class 選取器：貼了同一個記號的一群</h3>
+        <p>class 選取器前面要加一個點 <code>.</code>。在 HTML 端，用 <code>class</code> 屬性貼上記號：</p>
+        <pre><code class="language-css">.highlight {
+    background-color: #fef08a;
+    font-weight: bold;
+}</code></pre>
+        <pre><code class="language-html">&lt;p class="highlight"&gt;這一段會被畫上螢光筆。&lt;/p&gt;</code></pre>
+        <p>class 可以重複用在很多元素上。一個元素也可以同時有好幾個 class，中間用空白隔開：</p>
+        <pre><code class="language-html">&lt;p class="highlight big"&gt;這一段同時有兩個 class。&lt;/p&gt;</code></pre>
+
+        <h3>id 選取器：每個人只有一組的號碼</h3>
+        <p>id 選取器前面要加一個井字號 <code>#</code>。在 HTML 端，用 <code>id</code> 屬性：</p>
+        <pre><code class="language-css">#intro {
+    font-size: 20px;
+}</code></pre>
+        <pre><code class="language-html">&lt;p id="intro"&gt;這是自我介紹的開頭段。&lt;/p&gt;</code></pre>
+        <p>一頁裡，同一個 <code>id</code> 只能出現一次。</p>
+
+        <div class="cards">
+          <div class="card">
+            <p class="card-icon">👔</p>
+            <h3>class 像制服</h3>
+            <p>很多人可以穿同一套制服。同一個 class 可以貼在很多元素上。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">🪪</p>
+            <h3>id 像身分證字號</h3>
+            <p>每個人只有一組。同一頁裡，一個 id 只能給一個元素。</p>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <p class="callout-title">小提示</p>
+          <p>新手的原則很簡單：<strong>樣式一律用 class</strong>。id 留給之後 JavaScript 找元素時用（第 5 章）。第 3 章的表單裡，<code>label</code> 的 <code>for</code> 對應的也是 id，那是 id 的另一種用途。</p>
+        </div>
+
+        <h3>div：空盒子</h3>
+        <p><code>div</code> 是一個沒有特別意義的「空盒子」。它本身不代表任何內容，只是把幾個元素包在一起，好一起套上樣式。後面做卡片和排版時會常用到它。</p>
+        <pre><code class="language-html">&lt;div class="card"&gt;
+    &lt;h3&gt;我的興趣&lt;/h3&gt;
+    &lt;p&gt;爬山、看電影、做咖啡。&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <p>上面的 <code>div</code> 把標題和段落包成一組。之後只要替 <code>.card</code> 寫一條規則，裡面的東西就會一起換衣服。</p>
+
+        <h2>好幾條規則都管到同一個元素時</h2>
+        <p>一個元素可能同時被好幾條規則管到，這時候誰說了算？先記住下面三個概念就夠了。</p>
+
+        <h3>繼承：外面的衣服會穿到裡面</h3>
+        <p>在 <code>body</code> 設定的文字顏色和字型，裡面的文字都會跟著變。這叫做<strong>繼承</strong>。所以字型通常設在 <code>body</code>，整頁一次就到位：</p>
+        <pre><code class="language-css">body {
+    font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+    color: #1f2937;
+}</code></pre>
+
+        <h3>後寫的蓋前面</h3>
+        <p>同一個選取器寫了兩次，而且設定了同一個屬性，那麼<strong>後面那一條</strong>為準。</p>
+        <pre><code class="language-css">p {
+    color: red;
+}
+
+p {
+    color: blue;
+}</code></pre>
+        <p>上面的段落會是藍色，因為藍色那條寫在後面。</p>
+
+        <h3>越精準越優先</h3>
+        <p>class 比標籤選取器精準，所以會贏過標籤選取器。例如 <code>.highlight</code> 會贏過 <code>p</code>，就算 <code>p</code> 寫在後面也一樣。</p>
+
+        <div class="callout note">
+          <p class="callout-title">補充</p>
+          <p>有時候會看到 AI 寫 <code>!important</code>，例如 <code>color: red !important;</code>。它的意思是「硬性蓋過其他規則」。新手先不要用它，因為它會讓之後的修改變得很難。看到 AI 這樣寫，可以請它換成別的寫法，例如把選取器寫得更精準。</p>
+        </div>
+
+        <h2>試試看：替段落換衣服</h2>
+        <p>下面的小網頁已經寫好了 CSS。請動手做三件事，並觀察右邊預覽的變化：</p>
+        <ol>
+          <li>把 <code>h1</code> 的顏色換成別的顏色，例如 <code>green</code>（綠色）。</li>
+          <li>把 <code>class="highlight"</code> 加到另一個段落上，例如第一段。</li>
+          <li>故意把某一個分號「;」改成全形的「；」，看看會發生什麼事。看完再改回來。</li>
+        </ol>
+        <div class="tryit">
+          <textarea class="tryit-code" spellcheck="false">&lt;!doctype html&gt;
+&lt;html lang="zh-Hant-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;CSS 試穿間&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+            color: #1f2937;
+        }
+        h1 {
+            color: #2563eb;
+        }
+        p {
+            font-size: 18px;
+        }
+        .highlight {
+            background-color: #fef08a;
+            font-weight: bold;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;CSS 試穿間&lt;/h1&gt;
+    &lt;p&gt;這是第一段，它穿的是 p 的衣服。&lt;/p&gt;
+    &lt;p class="highlight"&gt;這是第二段，它貼了 highlight 的記號。&lt;/p&gt;
+    &lt;p&gt;這是第三段，字的顏色來自 body。&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+        </div>
+
+        <h2>文字：顏色、大小與字型</h2>
+        <p>網頁的衣服，先從文字開始。文字有四件事可以設定：顏色、大小、字型，還有行與行之間的距離。</p>
+        <p>我們先用 <code>color</code> 設定文字的顏色。顏色可以寫英文名字，例如 <code>red</code>，但更常用的是前面介紹過的色碼。例如 <code>#2563eb</code> 是一種藍色，<code>#333333</code> 是接近黑的深灰色。</p>
+        <p>文字大小用 <code>font-size</code>，單位一律用 <code>px</code>（像素）。<code>16px</code> 是一般閱讀的大小，<code>32px</code> 大約是大標題。</p>
+        <p>字型用 <code>font-family</code>。本站統一使用下面這一行：</p>
+        <pre><code class="language-css">font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;</code></pre>
+        <p>為什麼要列好幾個？因為每台電腦裝的字型不一樣。Windows 通常有「微軟正黑體」（Microsoft JhengHei），Mac 通常有「蘋方」（PingFang TC）。瀏覽器會從左到右找：第一個找得到就用它；找不到，就換下一個。最後的 <code>sans-serif</code> 是「無襯線字」，代表什麼字型都沒有時，就用系統預設的無襯線字。</p>
+        <p><code>line-height</code> 是<strong>行高</strong>，也就是兩行文字之間的距離。中文字比較方塊，行高太小會擠在一起，看起來很累。中文建議設在 <code>1.6</code> 到 <code>1.8</code> 之間。</p>
+        <p>這裡要特別注意：行高的值<strong>不加 px</strong>，直接寫倍數。<code>1.7</code> 的意思是「字的大小乘以 1.7」。這是少數不用加 <code>px</code> 的屬性值，寫成 <code>1.7px</code> 反而會失效。</p>
+        <p>文字的左右位置用 <code>text-align</code>。<code>left</code> 是靠左，<code>center</code> 是置中。想讓文字變粗，用 <code>font-weight: bold;</code>，效果和 HTML 的 <code>strong</code> 類似。</p>
+        <p>下面的範例把字型和行高設在 <code>body</code>。<code>body</code> 是整頁的外框，設在這裡，底下所有的文字都會繼承這些設定，不必每一段都重寫。</p>
+        <pre><code class="language-css">body {
+    font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #333333;
+}
+
+h1 {
+    color: #2563eb;
+    font-size: 32px;
+    text-align: center;
+}</code></pre>
+        <div class="callout tip">
+          <p class="callout-title">小提示</p>
+          <p>字型和行高設在 <code>body</code>，整頁都會繼承，最省事。只有某一個標題要特別的顏色時，才另外寫在標題的規則裡。</p>
+        </div>
+
+        <h2>背景、邊框與圓角</h2>
+        <p>文字設定好了，接下來是「區塊」的外觀。一段內容常常要放在一個有底色、有框線的卡片裡，這就需要下面三個屬性。</p>
+        <p><code>background-color</code> 設定背景色，例如 <code>background-color: #f5f7fa;</code> 會讓區塊變成淡淡的灰藍色。</p>
+        <p><code>border</code> 設定邊框，一行就包含三個值：</p>
+        <pre><code class="language-css">border: 1px solid #ddd;</code></pre>
+        <ul>
+          <li><code>1px</code>：粗細，線有多粗。</li>
+          <li><code>solid</code>：樣式，實線。另外還有 <code>dashed</code>（虛線）等，先用實線就好。</li>
+          <li><code>#ddd</code>：顏色，淺灰色。</li>
+        </ul>
+        <p>三個值用空白隔開，順序不能亂。</p>
+        <p><code>border-radius</code> 設定圓角。數字越大，角就越圓。<code>border-radius: 12px;</code> 會讓四個角都變圓一點點。</p>
+        <p>下面的範例，把一個 <code>.card</code> 加上淺色背景、邊框和圓角。<code>.card</code> 是我們自己取的 class 名字，前面學過，用 <code>.</code> 開頭的選取器可以選到所有 <code>class="card"</code> 的元素。</p>
+        <pre><code class="language-css">.card {
+    background-color: #f5f7fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}</code></pre>
+        <p>背景和文字要搭配好，才看得清楚。顏色對比太低，就算設定正確，讀的人也會覺得吃力。</p>
+        <div class="compare">
+          <div class="bad">
+            <p class="compare-label">✗ 顏色對比太低</p>
+            <p><code>background-color: #ffffff;</code> 配上 <code>color: #cccccc;</code></p>
+            <p>淺灰字配白底，看不清楚，像是快要消失的字。</p>
+          </div>
+          <div class="good">
+            <p class="compare-label">✓ 顏色對比清楚</p>
+            <p><code>background-color: #f5f7fa;</code> 配上 <code>color: #333333;</code></p>
+            <p>深色字配淺色底，一眼就能看清楚。</p>
+          </div>
+        </div>
+
+        <h2>寬度與圖片大小</h2>
+        <p>區塊要多寬，用 <code>width</code> 設定。例如 <code>width: 200px;</code> 會讓區塊固定是 200 像素寬。</p>
+        <p><code>max-width</code> 是「最寬不能超過」。它的意思是：可以比較窄，但不能超過這個數字。</p>
+        <p>圖片最需要這兩個屬性。手機拍的照片原始尺寸很大，可能有好幾千像素寬。如果不設定，它會直接撐爆整個頁面，讀的人要左右拖拉才看得到。</p>
+        <pre><code class="language-css">img {
+    width: 200px;
+}</code></pre>
+        <p>上面這行會讓<strong>所有圖片</strong>都固定是 200 像素寬。高度會跟著等比例變化，圖片不會變形。</p>
+        <p>如果希望圖片跟著外框的寬度，但又不要超過外框，可以用 <code>max-width: 100%;</code>。它的意思是「最寬是外框的 100%」，外框窄，圖片就跟著變窄；外框寬，圖片也不會超過它。</p>
+        <pre><code class="language-css">img {
+    max-width: 100%;
+}</code></pre>
+        <p>想把大頭照變成圓形，就用 <code>border-radius: 50%;</code>。50% 代表圓角的半徑是寬度的一半，正方形的四個角就會被切成圓形。要注意，圖片的寬和高必須一樣，才會是正圓；如果寬高不同，會變成橢圓。</p>
+        <pre><code class="language-css">.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}</code></pre>
+        <p><code>height</code> 是高度，寫法跟 <code>width</code> 一樣。<code>object-fit: cover;</code> 的作用是：如果照片的長寬比例不對，讓它填滿方框，多出來的部分裁掉。這一行目前照抄即可，之後需要時再回來細看。</p>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>只設 <code>width</code> 時，圖片會等比例縮放，不會變形。同時設了 <code>width</code> 和 <code>height</code>，卻沒有加 <code>object-fit: cover;</code>，照片就會被壓扁或拉長。大頭照要變圓時，寬和高寫成一樣的數字，再加上 <code>object-fit: cover;</code>。</p>
+        </div>
+
+        <h2>盒子模型：padding、border、margin</h2>
+        <p>CSS 有一個很重要的觀念：<strong>每個元素都是一個盒子</strong>。段落是盒子，圖片是盒子，卡片也是盒子。盒子由內到外，分成四層：</p>
+        <ol>
+          <li><strong>內容（content）</strong>：盒子裡面真正的東西，例如文字或照片。</li>
+          <li><strong>padding（內距）</strong>：內容和邊框之間的留白。</li>
+          <li><strong>border（邊框）</strong>：盒子的框線。</li>
+          <li><strong>margin（外距）</strong>：盒子和別的盒子之間的距離。</li>
+        </ol>
+        <p>可以把它想成相框。照片就是內容；照片和相框之間會墊一張襯紙，這就是 padding；相框本身是 border；掛在牆上時，相框和相框之間、相框和牆壁之間的距離，就是 margin。</p>
+        <div class="cards">
+          <div class="card">
+            <p class="card-icon">🖼️</p>
+            <h3>padding：襯紙</h3>
+            <p>盒子裡面的留白。數字越大，內容離框線越遠。</p>
+            <p><code>padding: 16px;</code> 代表四邊都留 16 像素。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">🟫</p>
+            <h3>border：相框</h3>
+            <p>盒子的框線。寫法是「粗細 樣式 顏色」。</p>
+            <p><code>border: 1px solid #ddd;</code> 是一條淺灰色的細實線。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">↔️</p>
+            <h3>margin：牆面距離</h3>
+            <p>盒子外面的距離，把它和別的盒子隔開。</p>
+            <p><code>margin-bottom: 24px;</code> 會讓它和下面的內容隔開 24 像素。</p>
+          </div>
+        </div>
+        <p>三個屬性的寫法都一樣。<code>padding: 16px;</code> 只寫一個數字，就是四邊都一樣。如果想分開設定，可以依序寫上、右、下、左，但先記得「一個數字，四邊相同」就夠了。</p>
+        <p>有一招在做卡片時非常常用，就是讓盒子<strong>左右置中</strong>：</p>
+        <pre><code class="language-css">.box {
+    max-width: 600px;
+    margin: 0 auto;
+}</code></pre>
+        <p><code>margin: 0 auto;</code> 的意思是：上下的外距是 <code>0</code>，左右的外距是 <code>auto</code>（自動）。左右的空間會被平均分給兩邊，盒子就正好置中。</p>
+        <p>要注意，這招需要搭配 <code>max-width</code>（或 <code>width</code>）。盒子如果沒有設定寬度，會直接撐滿整個外框，左右就沒有空間可以分，置中也就看不出來。</p>
+        <p>下面是一個完整的卡片範例，把這一節學到的東西全部用上。</p>
+        <pre><code class="language-css">.card {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #fff;
+}</code></pre>
+        <p>這張卡片最寬 600 像素，左右置中；內容和邊框之間留 24 像素；邊框是淺灰色的細線，四個角是圓的；背景是白色。</p>
+        <div class="callout note">
+          <p class="callout-title">補充</p>
+          <p>一開始看到 <code>padding</code> 和 <code>margin</code> 很容易搞混。記法是：<strong>padding 在框的裡面，margin 在框的外面</strong>。</p>
+        </div>
+
+        <h2>用開發者工具看 CSS、直接改改看</h2>
+        <p>規則寫多了，常常會搞不清楚「到底是哪一條規則讓這行字變成藍色」。開發者工具可以直接告訴你答案，而且還能即時改數字。</p>
+        <ol class="flow">
+          <li><strong>右鍵「檢查」</strong><span>在網頁上想看的地方按右鍵，選「檢查」。</span></li>
+          <li><strong>選到元素</strong><span>開發者工具會反白對應的 HTML 元素。滑鼠移過去，網頁上也會標出它的範圍。</span></li>
+          <li><strong>看 Styles 面板</strong><span>Styles 面板會列出套用在這個元素上的所有規則，以及它來自哪一個檔案。</span></li>
+          <li><strong>點值直接改</strong><span>點一下數字，直接改成別的值，網頁立刻變化。勾選框則可以暫時關掉某條規則。</span></li>
+        </ol>
+        <p>在 Styles 面板裡，有時會看到某一條規則的文字上有一條橫線，像是被刪掉一樣。這表示這條規則<strong>被別條蓋過了</strong>。這跟前面學過的「後寫的蓋前面」是同一個道理：同一個屬性，只會有一個值生效，其他的會被蓋掉。</p>
+        <p>Styles 面板的最下面，還有一個盒子圖，用不同的顏色標出 margin、border、padding 和內容的大小。想確認某個盒子的內距到底是多少，看這裡最快。</p>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>在開發者工具裡改的數字，只是<strong>暫時的</strong>。重新整理頁面，就會回到原來的樣子。調到滿意之後，記得把數字<strong>抄回 <code>style.css</code></strong>，不然下次打開還是舊的。</p>
+        </div>
+
+        <h2>試試看：做一張名片卡</h2>
+        <p>這一節的最後，我們用學過的東西做一張名片卡。下面的小網頁，CSS 寫在 <code>&lt;style&gt;</code> 裡面。</p>
+        <p>試試看只有一個檔案，讀不到外部的 <code>style.css</code>，也放不了真的照片。所以大頭照用一個藍色的圓形色塊，中間放一個「王」字代替。</p>
+        <p>動手前，可以先試試下面三件事，觀察預覽的變化：</p>
+        <ul>
+          <li>把 <code>.card</code> 裡的 <code>padding</code> 改成 <code>0</code>，再改成 <code>48px</code>，比較卡片內容和邊框之間的距離。</li>
+          <li>把 <code>.card</code> 裡的 <code>border-radius</code> 改成 <code>40px</code>，看看四個角變成什麼樣子。</li>
+          <li>把 <code>.card</code> 裡的 <code>margin</code> 改成 <code>40px 0</code>（左右改成 0），看看卡片跑去哪裡了。改回 <code>40px auto</code> 後，再和前一個結果比較。</li>
+        </ul>
+        <div class="tryit">
+          <textarea class="tryit-code" spellcheck="false">&lt;!doctype html&gt;
+&lt;html lang="zh-Hant-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;名片卡&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            background-color: #eeeeee;
+            font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+            line-height: 1.7;
+            color: #333333;
+        }
+
+        .card {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 24px;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            background-color: #2563eb;
+            color: #ffffff;
+            border-radius: 50%;
+            font-size: 32px;
+            line-height: 80px;
+            text-align: center;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="card"&gt;
+        &lt;div class="avatar"&gt;王&lt;/div&gt;
+        &lt;h1&gt;王小明&lt;/h1&gt;
+        &lt;p&gt;行政部｜很高興認識大家&lt;/p&gt;
+        &lt;p&gt;興趣：爬山、看電影、做咖啡&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+        </div>
+        <p>試著改完之後，你會發現：<code>margin: 40px auto;</code> 裡的 <code>auto</code> 負責左右置中，少了它，卡片就會靠到左邊去。這就是前面說的置中招式。</p>
+
+        <h2>Flexbox：讓東西排成一排</h2>
+        <p>你可能已經發現，<code>h1</code>、<code>p</code>、<code>div</code>、<code>ul</code> 這類元素，預設會一個疊一個往下排。如果想讓幾個盒子並排，就要請 CSS 幫忙安排，這個工具叫做 Flexbox（彈性盒子）。</p>
+        <p>你可以把它想成<strong>排隊</strong>：一群人站在同一條隊伍裡，從左到右排成一排。要讓裡面的盒子排成一排，就在它們的<strong>外層盒子</strong>上寫 <code>display: flex;</code>，意思是「請裡面的東西排隊」。</p>
+
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p><code>display: flex;</code> 要寫在<strong>外層</strong>的盒子上，寫在裡面的小盒子上沒有效果。例如要讓標籤排成一排，要寫在 <code>ul</code> 上，不是寫在每一個 <code>li</code> 上。</p>
+        </div>
+
+        <p>本節只需要記得四個屬性：</p>
+        <ul>
+          <li><strong><code>display: flex;</code>：</strong>寫在外層，讓裡面的盒子排成一排。</li>
+          <li><strong><code>gap</code>：</strong>盒子和盒子之間的距離，例如 <code>gap: 8px;</code>。</li>
+          <li><strong><code>justify-content</code>：</strong>橫向怎麼分配。<code>flex-start</code> 是靠左（預設），<code>center</code> 是置中，<code>space-between</code> 是第一個靠左、最後一個靠右，中間的距離平均分開。</li>
+          <li><strong><code>align-items</code>：</strong>直向怎麼對齊。<code>center</code> 是上下置中，常用在大頭照和文字並排的時候。</li>
+        </ul>
+
+        <p>第一個例子，把「我的興趣」做成一排小標籤。HTML 先寫一個 <code>ul</code>，並加上 <code>class="tags"</code>：</p>
+        <pre><code class="language-html">&lt;h2&gt;我的興趣&lt;/h2&gt;
+&lt;ul class="tags"&gt;
+    &lt;li&gt;爬山&lt;/li&gt;
+    &lt;li&gt;看電影&lt;/li&gt;
+    &lt;li&gt;做咖啡&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+        <p>CSS 這樣寫：</p>
+        <pre><code class="language-css">/* 外層：讓裡面的 li 排成一排，間距 8px */
+.tags {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+}
+
+/* 每一個小標籤：背景色、圓角、內距 */
+.tags li {
+    background-color: #dbeafe;
+    border-radius: 16px;
+    padding: 4px 12px;
+}</code></pre>
+
+        <p>其中 <code>list-style: none;</code> 和 <code>padding: 0;</code> 是什麼？<code>ul</code> 預設會在每一項前面加上圓點，而且整個清單會往右縮排。<code>list-style: none;</code> 是把圓點拿掉，<code>padding: 0;</code> 是把預設的縮排拿掉。這兩行只是為了讓清單看起來像標籤，本節不用特別記。</p>
+
+        <p>第二個例子，大頭照和名字左右並排。這時候要用 <code>div</code> 把兩個東西包在一起，外層的 <code>div</code> 加上 <code>class="profile"</code>：</p>
+        <pre><code class="language-html">&lt;div class="profile"&gt;
+    &lt;img class="avatar" src="images/me.jpg" alt="王小明的大頭照"&gt;
+    &lt;h1&gt;王小明&lt;/h1&gt;
+&lt;/div&gt;</code></pre>
+
+        <pre><code class="language-css">.profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}</code></pre>
+
+        <p><code>align-items: center;</code> 讓照片和名字在上下方向置中對齊，<code>gap: 16px;</code> 讓它們之間留出一點空白。</p>
+
+        <h2>試試看：把東西排好</h2>
+        <p>下面是一個完整的小網頁。預覽區有一個圓形色塊（代替照片），旁邊是名字；下面是一排興趣標籤。預覽下面有三個小練習，照順序動手改，看看畫面怎麼變。</p>
+        <p>注意 CSS 裡的 <code>.tags li</code> 這種寫法，意思是「.tags 裡面的 li」，也就是只有在 <code>.tags</code> 裡面的 <code>li</code> 才會套用這組樣式。</p>
+        <div class="tryit">
+          <textarea class="tryit-code" spellcheck="false">&lt;!doctype html&gt;
+&lt;html lang="zh-Hant-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;排好的自我介紹&lt;/title&gt;
+    &lt;style&gt;
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: #2563eb;
+        }
+        .tags {
+            display: flex;
+            gap: 8px;
+            list-style: none;
+            padding: 0;
+        }
+        .tags li {
+            background-color: #dbeafe;
+            border-radius: 16px;
+            padding: 4px 12px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="profile"&gt;
+        &lt;div class="avatar"&gt;&lt;/div&gt;
+        &lt;h1&gt;王小明&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;h2&gt;我的興趣&lt;/h2&gt;
+    &lt;ul class="tags"&gt;
+        &lt;li&gt;爬山&lt;/li&gt;
+        &lt;li&gt;看電影&lt;/li&gt;
+        &lt;li&gt;做咖啡&lt;/li&gt;
+        &lt;li&gt;閱讀&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+        </div>
+        <p>動手改改看：</p>
+        <ol>
+          <li>在 <code>.tags</code> 裡加一行 <code>justify-content: center;</code>，看標籤會不會移到中間。再把它改成 <code>space-between</code>，看看變成什麼樣子。</li>
+          <li>把 <code>.tags</code> 的 <code>gap: 8px;</code> 改成 <code>gap: 24px;</code>，看標籤之間的距離變大了沒有。</li>
+          <li>把 <code>.profile</code> 裡的 <code>display: flex;</code> 刪掉，看圓形色塊和名字會變成什麼樣子。改完之後記得再把它加回來。</li>
+        </ol>
+
+        <h2>跟 AI 一起做：一次只改一件事</h2>
+        <p>CSS 的屬性有成千上百個，沒有人會全部背起來。寫 CSS 的時候，你可以請 AI 幫忙寫，這是很實用的做法。</p>
+        <div class="callout ai">
+          <p class="callout-title">跟 AI 一起做</p>
+          <p>但有兩件事要注意：</p>
+          <ol>
+            <li><strong>一次只要求一件事。</strong>每次只請 AI 改一個地方，改完打開畫面確認，再進行下一步。如果一次改太多，畫面出問題的時候，你就不知道是哪一行造成的。</li>
+            <li><strong>請 AI 解釋它寫的每一行。</strong>看不懂的屬性，直接問它「這一行是在做什麼？」，不要照單全收。</li>
+          </ol>
+        </div>
+
+        <p>下面是一段可以直接複製的提示詞，請 AI 幫你替自我介紹頁寫 <code>style.css</code>：</p>
+        <div class="prompt">
+          <p class="prompt-label">對 AI 這樣說</p>
+          <p class="prompt-text">這是我的自我介紹頁 HTML（貼上 index.html）。請幫我寫一個 style.css：把整頁內容放在一張置中的白色卡片裡，背景用淺灰色，字型用微軟正黑體。只寫 CSS，不要改 HTML 的結構；如果一定要加 class，請告訴我要加在哪一行。每一條規則上面加中文註解，說明它在做什麼。</p>
+        </div>
+
+        <p>提示詞寫得清楚不清楚，AI 給的結果也會不一樣：</p>
+        <div class="compare">
+          <div class="bad">
+            <p class="compare-label">✗ 這樣不好</p>
+            <p>「幫我把網頁弄漂亮」</p>
+            <p>範圍太模糊，AI 可能整個重寫，還會加上一堆你沒學過的東西，改完也不知道哪裡變了。</p>
+          </div>
+          <div class="good">
+            <p class="compare-label">✓ 這樣比較好</p>
+            <p>說清楚<strong>要改哪裡</strong>、<strong>改成什麼樣子</strong>，而且<strong>一次一件事</strong>。例如：「請把內容放進白色卡片，卡片置中」。</p>
+            <p>範圍小，改完容易檢查，出錯也容易找到原因。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>AI 常會寫出你還沒學過的東西，例如 <code>grid</code>、<code>@media</code>、<code>!important</code>、<code>rem</code>。看不懂的時候，可以問它「這一行在做什麼？可以用比較簡單的寫法嗎？」。另外，貼上去之前，先把原本的 <code>style.css</code> 複製成 <code>style-backup.css</code> 留作備份，萬一改壞了，還可以拿回來。</p>
+        </div>
+
+        <h2>重點回顧</h2>
+        <ul>
+          <li><strong>CSS 寫在 style.css：</strong>在 <code>head</code> 裡用 <code>&lt;link rel="stylesheet" href="style.css"&gt;</code> 接上，檔名和路徑要一致。</li>
+          <li><strong>規則的格式：</strong>選取器 + 大括號，裡面是「屬性: 值;」。冒號、分號、大括號都要用半形，全形符號會讓樣式失效。</li>
+          <li><strong>新手樣式用 class：</strong>要挑出特定元素時，在 HTML 加上 <code>class="名字"</code>，CSS 寫成 <code>.名字</code>，不要用 id。整頁共通的設定（例如 <code>body</code>）才用標籤選取器。</li>
+          <li><strong>常用屬性：</strong>顏色、字的大小和字型、行高、背景色、邊框與圓角、寬度與最大寬度。</li>
+          <li><strong>盒子模型與置中：</strong>內距 <code>padding</code> 在內側，外距 <code>margin</code> 在外側；寫 <code>max-width</code> 搭配 <code>margin: 0 auto;</code> 就能讓盒子置中。</li>
+          <li><strong>flex 寫在外層：</strong>要讓東西排成一排，<code>display: flex;</code> 寫在外層盒子上。請 AI 寫 CSS 時，一次只改一件事，改完確認再繼續。</li>
+        </ul>
+      </article>
+
+      <section class="exercise">
+        <h2>動手做</h2>
+        <p>替第 3 章的自我介紹頁換上衣服。</p>
+        <ol>
+          <li><strong>新增 style.css。</strong>在 <code>my-first-web</code> 資料夾裡（和 <code>index.html</code> 放在同一層），新增一個檔案，名稱是 <code>style.css</code>。</li>
+          <li><strong>在 index.html 接上 style.css。</strong>在 <code>head</code> 裡、<code>title</code> 的下面加一行：<code>&lt;link rel="stylesheet" href="style.css"&gt;</code>。</li>
+          <li><strong>設定 body。</strong>在 style.css 寫 <code>body</code> 的規則：淺灰色背景、微軟正黑體、行高 <code>1.8</code>、文字顏色。存檔後確認畫面有變。如果沒變，看本節最下面的「樣式沒出現，或排版怪怪的？」。</li>
+          <li><strong>加上白色卡片。</strong>在 index.html 的 <code>body</code> 裡，用 <code>&lt;div class="card"&gt;</code> 把所有內容包起來。在 style.css 寫 <code>.card</code>：白色背景、最大寬度 <code>640px</code>、<code>margin: 40px auto;</code>、內距、圓角、邊框。</li>
+          <li><strong>讓大頭照變圓。</strong>在 img 加上 <code>class="avatar"</code>。在 style.css 寫 <code>.avatar</code>：寬高 <code>120px</code>、<code>border-radius: 50%;</code>、<code>object-fit: cover;</code>。</li>
+          <li><strong>把興趣變成一排標籤。</strong>在興趣的 <code>ul</code> 加上 <code>class="tags"</code>，再到 style.css 寫 <code>.tags</code> 和 <code>.tags li</code>，讓它用 flex 排成一排。</li>
+          <li><strong>用開發者工具試改顏色。</strong>在瀏覽器裡按右鍵「檢查」，在 Styles 面板試改顏色，看看哪一個顏色最好看。滿意之後，再把它抄回 style.css。</li>
+          <li><strong>加分題：連結和按鈕。</strong>在 style.css 寫 <code>a</code> 的規則，讓連結有自己的顏色。如果有送出按鈕，也替 <code>button</code> 寫規則：背景色、文字顏色、<code>border: none;</code>、內距、圓角。</li>
+        </ol>
+
+        <details>
+          <summary>參考答案：index.html</summary>
+          <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-Hant-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;王小明的自我介紹&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="card"&gt;
+        &lt;h1&gt;王小明&lt;/h1&gt;
+        &lt;img class="avatar" src="images/me.jpg" alt="王小明的大頭照"&gt;
+        &lt;p&gt;我是行政部的同事，很高興認識大家，請多指教！&lt;/p&gt;
+
+        &lt;h2&gt;我的興趣&lt;/h2&gt;
+        &lt;ul class="tags"&gt;
+            &lt;li&gt;爬山&lt;/li&gt;
+            &lt;li&gt;看電影&lt;/li&gt;
+            &lt;li&gt;做咖啡&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;h2&gt;工作上的我&lt;/h2&gt;
+        &lt;p&gt;我負責公司的&lt;strong&gt;採購與庶務&lt;/strong&gt;，有需要辦公用品或安排會議室，都可以找我。&lt;/p&gt;
+
+        &lt;p&gt;我常用 &lt;a href="https://zh.wikipedia.org/"&gt;維基百科&lt;/a&gt; 查資料。&lt;/p&gt;
+
+        &lt;h2&gt;留言給我&lt;/h2&gt;
+        &lt;form&gt;
+            &lt;p&gt;
+                &lt;label for="guest-name"&gt;姓名&lt;/label&gt;
+                &lt;input type="text" id="guest-name" required&gt;
+            &lt;/p&gt;
+            &lt;p&gt;
+                &lt;label for="guest-message"&gt;留言&lt;/label&gt;
+                &lt;textarea id="guest-message"&gt;&lt;/textarea&gt;
+            &lt;/p&gt;
+            &lt;p&gt;
+                &lt;button type="submit"&gt;送出&lt;/button&gt;
+            &lt;/p&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </details>
+
+        <details>
+          <summary>參考答案：style.css</summary>
+          <pre><code class="language-css">/* 整頁：淺灰色背景、微軟正黑體、行高 1.8、深灰色文字 */
+body {
+    background-color: #f3f4f6;
+    font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+    line-height: 1.8;
+    color: #1f2937;
+}
+
+/* 白色卡片：置中、最寬 640px、四周留內距、圓角與邊框 */
+.card {
+    background-color: #ffffff;
+    max-width: 640px;
+    margin: 40px auto;
+    padding: 32px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+/* 大頭照：變成 120 × 120 的圓形，照片置中裁切 */
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 興趣清單外層：用 flex 排成一排，間距 8px；拿掉圓點與預設縮排 */
+.tags {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+}
+
+/* 每一個興趣標籤：淺藍背景、圓角、內距 */
+.tags li {
+    background-color: #dbeafe;
+    border-radius: 16px;
+    padding: 4px 12px;
+}
+
+/* 加分題：連結的文字顏色 */
+a {
+    color: #2563eb;
+}
+
+/* 加分題：送出按鈕的背景與文字顏色、圓角、內距 */
+/* cursor: pointer 讓滑鼠移到按鈕上時，游標變成手指形狀 */
+button {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}</code></pre>
+        </details>
+
+        <details>
+          <summary>樣式沒出現，或排版怪怪的？</summary>
+          <ul>
+            <li><strong>link 接錯了：</strong><code>href</code> 的檔名要和 style.css 完全一樣，而且 style.css 必須和 index.html 放在同一個資料夾。</li>
+            <li><strong>用了全形符號：</strong>冒號 <code>：</code>、分號 <code>；</code>、大括號 <code>｛｝</code> 都是全形，瀏覽器看不懂，整條規則就會失效。要改成半形。</li>
+            <li><strong>class 名稱對不上：</strong>CSS 要加點，HTML 不加點。HTML 寫 <code>class="tags"</code>，CSS 就寫 <code>.tags</code>。大小寫也要一樣。</li>
+            <li><strong>flex 寫錯地方：</strong><code>display: flex;</code> 要寫在外層的 <code>ul</code>（或 <code>div</code>）上，不是寫在裡面的 <code>li</code> 上。</li>
+            <li><strong>改了沒存檔，或瀏覽器沒重新整理：</strong>先按 <kbd>Ctrl</kbd> + <kbd>S</kbd>（Mac 是 <kbd>⌘</kbd> + <kbd>S</kbd>），再重新整理瀏覽器。</li>
+            <li><strong>用開發者工具檢查：</strong>在元素上按右鍵「檢查」，看 Styles 面板。如果你寫的規則沒有出現，代表選取器沒有對到元素；如果規則出現了但被劃掉，代表它被後面的另一條規則蓋過了。</li>
+          </ul>
+        </details>
+      </section>
+
+      <div class="read-mark" id="read-mark"></div>   <!-- site.js 填入「標記為已讀」 -->
+      <nav class="pager" id="pager" aria-label="上一篇與下一篇"></nav>  <!-- site.js 填入 -->
+    </main>
+    <aside class="toc" id="toc" aria-label="本頁目錄"></aside>   <!-- site.js 填入 -->
+  </div>
+  <script src="../assets/js/nav-data.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>
