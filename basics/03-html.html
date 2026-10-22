@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1280">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A7%A9%3C/text%3E%3C/svg%3E">
+  <title>HTML：網頁的骨架｜AI Web 開發入門</title>
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body data-page="basics/03-html" data-root="../">
+  <div class="layout">
+    <nav class="sidebar" id="sidebar" aria-label="課程目錄"></nav>   <!-- site.js 填入 -->
+    <main class="content">
+      <header class="page-header">
+        <p class="eyebrow">網頁基礎 · 第 3 章</p>
+        <h1>HTML：網頁的骨架</h1>
+        <p class="lead">HTML 決定網頁上「有什麼」：標題、段落、清單、圖片、連結和表單。這一章把它們一個一個認識，並把你的自我介紹頁補得更完整。</p>
+        <p class="meta"><span>閱讀 30 分</span><span>練習 30 分</span></p>
+      </header>
+
+      <section class="goals">
+        <h2>學完這篇，你會</h2>
+        <ul>
+          <li>看懂標籤、巢狀和屬性，知道網頁骨架每一行在做什麼。</li>
+          <li>會用標題、段落、清單、連結和圖片組出一頁內容。</li>
+          <li>認得表單的基本零件，知道 <code>label</code> 為什麼要跟欄位連起來。</li>
+          <li>請 AI 寫出 HTML 後，能自己找出每一塊用了哪個標籤。</li>
+        </ul>
+      </section>
+
+      <article class="article">
+        <h2>標籤：替內容貼上名牌</h2>
+        <p>第 2 章的 <code>index.html</code> 裡，到處都是像 <code>&lt;h1&gt;</code>、<code>&lt;p&gt;</code> 這樣的角括號。這些角括號包起來的文字，就叫做<strong>標籤（tag）</strong>。本章要把它們一個一個弄懂。</p>
+        <p>標籤通常成對出現，中間夾著內容。以一段最短的段落為例：</p>
+        <div class="cards">
+          <div class="card">
+            <p class="card-icon">①</p>
+            <h3>開始標籤</h3>
+            <p><code>&lt;p&gt;</code> 是開始的名牌，告訴瀏覽器「段落從這裡開始」。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">②</p>
+            <h3>內容</h3>
+            <p><code>你好</code> 是要顯示在畫面上的文字。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">③</p>
+            <h3>結束標籤</h3>
+            <p><code>&lt;/p&gt;</code> 多了一條斜線，告訴瀏覽器「段落到這裡結束」。</p>
+          </div>
+        </div>
+        <p>把三個部分合在一起，就是一個<strong>元素（element）</strong>：<code>&lt;p&gt;你好&lt;/p&gt;</code>。之後說「一個 p 元素」，指的就是這整組。</p>
+        <p>瀏覽器不會把角括號顯示在畫面上。它會讀取標籤，決定中間的內容「是什麼」：是標題、是段落，還是一張圖片。同樣的文字「你好」，放在 <code>&lt;h1&gt;</code> 裡會變成大標題，放在 <code>&lt;p&gt;</code> 裡就是一般的段落。</p>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>最常見的錯誤，是忘了寫結束標籤，或是斜線方向寫反。例如把 <code>&lt;/p&gt;</code> 寫成 <code>&lt;\p&gt;</code>，瀏覽器看不懂，後面的內容可能全部跑掉或變成奇怪的樣子。遇到畫面怪怪的，先檢查每個標籤有沒有成對、斜線有沒有寫對。</p>
+        </div>
+        <p>另外要知道，有些標籤沒有結束標籤，例如之後會學到的 <code>&lt;img&gt;</code>（放圖片）和 <code>&lt;br&gt;</code>（換行）。它們只需要一個標籤就能完成工作。現在先知道有這種情況就好，遇到時再說明。</p>
+
+        <h2>巢狀：標籤裡面還有標籤</h2>
+        <p>標籤可以放在別的標籤裡面，這叫做<strong>巢狀（nested）</strong>。可以把它想成便當盒的格子：大格子裡放小格子，小格子要整個待在大格子裡面，不能一半露在外面。</p>
+        <p>舉例來說，想讓一段文字中的「重要」兩個字變成粗體，要用 <code>&lt;strong&gt;</code> 標籤。<strong>strong</strong> 的意思是「粗體，表示重要」，下一節會再仔細介紹。它要放在 <code>&lt;p&gt;</code> 裡面。下面的對照可以看出差別：</p>
+        <div class="compare">
+          <div class="bad">
+            <p class="compare-label">✗ 這樣不好</p>
+            <p><code>&lt;p&gt;&lt;strong&gt;重要&lt;/p&gt;&lt;/strong&gt;</code></p>
+            <p>兩個元素交錯了：<code>strong</code> 還沒結束，<code>p</code> 就先結束。瀏覽器只能猜你的意思。</p>
+          </div>
+          <div class="good">
+            <p class="compare-label">✓ 這樣比較好</p>
+            <p><code>&lt;p&gt;&lt;strong&gt;重要&lt;/strong&gt;&lt;/p&gt;</code></p>
+            <p>先開的後關。<code>strong</code> 完整地包在 <code>p</code> 裡面。</p>
+          </div>
+        </div>
+        <p>記住一個原則：<strong>後開的標籤要先關</strong>。就像穿衣服，最後穿上的外套要最先脫下來。</p>
+        <p>巢狀寫多了，很容易看不出誰包著誰。所以寫程式時會習慣用<strong>縮排</strong>（行首的空白）來排列。縮排不影響網頁的顯示，瀏覽器其實不在乎有沒有縮排。它的用途是讓人一眼就能看出：哪一行被包在哪一行裡面。</p>
+
+        <h2>屬性：給標籤加上補充資料</h2>
+        <p>有時候標籤本身還需要多一點資訊，例如「這個網頁是什麼語言」。這時候要把<strong>屬性（attribute）</strong>寫在開始標籤裡面。以第 2 章改過的第一行為例：</p>
+        <pre><code class="language-html">&lt;html lang="zh-Hant-TW"&gt;</code></pre>
+        <p>這一行裡，<code>html</code> 是標籤名稱，<code>lang="zh-Hant-TW"</code> 就是屬性。屬性的格式是：</p>
+        <ul>
+          <li><strong>名稱="值"</strong>：先寫屬性名稱，接著等號，再接值。</li>
+          <li><strong>值要用雙引號包起來</strong>：寫成 <code>"zh-Hant-TW"</code>。少了引號或用了全形引號，瀏覽器可能會讀錯。</li>
+          <li><strong>可以有好幾個屬性</strong>：屬性之間用空白隔開，例如骨架裡的 <code>&lt;meta name="viewport" content="…"&gt;</code> 就有兩個屬性。</li>
+        </ul>
+        <p>屬性是標籤的「補充說明」。標籤決定內容的種類，屬性則告訴瀏覽器更多細節，例如語言、連結要去哪裡、圖片從哪裡來。介紹連結和圖片時，會用到兩個很常見的屬性：<code>href</code>（連結要去哪裡），以及 <code>src</code> 和 <code>alt</code>（圖片從哪裡來、圖片的文字說明）。現在先認得「名稱="值"」這個格式就夠了。</p>
+
+        <h2>註解：寫給人看的筆記</h2>
+        <p><strong>註解（comment）</strong>是寫給人看的筆記，瀏覽器會直接忽略它，不會顯示在畫面上。格式如下：</p>
+        <pre><code class="language-html">&lt;!-- 這是註解 --&gt;</code></pre>
+        <p>註解有兩個常見用途：</p>
+        <ul>
+          <li><strong>留筆記</strong>：提醒自己或同事這一段在做什麼，例如 <code>&lt;!-- 這裡放我的興趣 --&gt;</code>。</li>
+          <li><strong>暫時關掉一行</strong>：不想刪掉某一行，又想先看看沒有它會怎樣，就把它變成註解。</li>
+        </ul>
+        <p>在 VS Code 裡，可以用快捷鍵快速加上或取消註解：Windows 按 <kbd>Ctrl</kbd> + <kbd>/</kbd>，Mac 按 <kbd>⌘</kbd> + <kbd>/</kbd>。先選取想註解的那一行，按一次加上，再按一次取消。</p>
+        <div class="callout note">
+          <p class="callout-title">補充</p>
+          <p>AI 產生的程式碼常常有註解。如果看不懂某一段在做什麼，可以先看看上面有沒有註解；沒有的話，也可以請 AI 幫你每一段加上註解，再慢慢讀。</p>
+        </div>
+
+        <h2>一行一行拆解網頁骨架</h2>
+        <p>第 2 章結束時，我們用 VS Code 產生了一份網頁骨架。現在把它完整拆開來看。下面是 <code>my-first-web/index.html</code> 的內容：</p>
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-Hant-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;王小明的自我介紹&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;王小明&lt;/h1&gt;
+    &lt;p&gt;我是行政部的同事，很高興認識大家，請多指教！&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <p>逐行說明如下：</p>
+        <ul>
+          <li><code>&lt;!DOCTYPE html&gt;</code>：告訴瀏覽器，這是現代的 HTML 網頁。它不是一般的標籤，只是一個宣告，寫在最前面就好。</li>
+          <li><code>&lt;html lang="zh-Hant-TW"&gt;</code>：整份網頁的最外層。<code>lang</code> 屬性表示這份網頁的語言是繁體中文（台灣）。</li>
+          <li><code>&lt;head&gt;</code>：網頁的「頭部」，放的是給瀏覽器看的設定，本身不會直接顯示在畫面上。</li>
+          <li><code>&lt;meta charset="UTF-8"&gt;</code>：設定文字的編碼方式。第 1 章說過，網頁是文字檔，這一行就是告訴瀏覽器「用 UTF-8 的規則讀這些字」。少了它，中文可能會變成亂碼。</li>
+          <li><code>&lt;meta name="viewport" ...&gt;</code>：讓網頁在手機上正常顯示的設定。我們目前只做電腦版，但它照抄就好，先不用深究。</li>
+          <li><code>&lt;title&gt;王小明的自我介紹&lt;/title&gt;</code>：瀏覽器分頁上顯示的名字。它不會出現在網頁的正文裡。</li>
+          <li><code>&lt;body&gt;</code>：網頁的「身體」，所有看得見的內容都放在這裡面。</li>
+        </ul>
+        <p>可以用兩張卡片來對照 <code>head</code> 和 <code>body</code>：</p>
+        <div class="cards">
+          <div class="card">
+            <p class="card-icon">📋</p>
+            <h3>head：給瀏覽器看的</h3>
+            <p>像包裹上的寄件單。寫著編碼、分頁標題這些設定，收件的瀏覽器會先讀它，但它不是包裹裡的東西。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">📦</p>
+            <h3>body：給人看的</h3>
+            <p>像包裹裡的東西。標題、段落、圖片，所有你在畫面上看到的內容，都放在這裡。</p>
+          </div>
+        </div>
+        <div class="callout tip">
+          <p class="callout-title">小提示</p>
+          <p>骨架每次都長得一樣，不用背。用 VS Code 輸入 <kbd>!</kbd> 再按 <kbd>Tab</kbd> 就能產生，或請 AI 幫你產生。你只需要記得三件事：改 <code>lang</code>、改 <code>title</code>，以及把內容寫在 <code>body</code> 裡面。</p>
+        </div>
+
+        <h2>試試看：觀察標籤的效果</h2>
+        <p>下面的小網頁已經可以直接編輯。請試著做三件事，觀察右邊的預覽有什麼變化：</p>
+        <ol>
+          <li><strong>刪掉 <code>&lt;/h1&gt;</code> 這個結束標籤</strong>，看看下面的段落會變成什麼樣子。看完再把它加回去。</li>
+          <li><strong>把註解符號拿掉</strong>，也就是 <code>&lt;!--</code> 和 <code>--&gt;</code>，看看那行文字會不會出現在畫面上。</li>
+          <li><strong>改 <code>&lt;title&gt;</code> 的文字</strong>，例如改成「我的小網頁」，看看預覽有沒有變。你會發現預覽裡看不到它。這是因為 title 只會出現在瀏覽器的分頁上，不在網頁的正文裡。</li>
+        </ol>
+        <div class="tryit">
+          <textarea class="tryit-code" spellcheck="false">&lt;!doctype html&gt;
+&lt;html lang="zh-Hant-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;我的小網頁&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- 這一行是註解，畫面上看不到 --&gt;
+    &lt;h1&gt;我的小網頁&lt;/h1&gt;
+    &lt;p&gt;這是第一段，我正在學習標籤。&lt;/p&gt;
+    &lt;p&gt;這是第二段，裡面有一個&lt;strong&gt;重要&lt;/strong&gt;的字。&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+        </div>
+
+        <h2>標題與段落</h2>
+        <p>網頁裡的文字，大多是標題和段落。HTML 用不同的標籤來區分它們。</p>
+        <p>標題有六個等級，從 <code>h1</code> 到 <code>h6</code>。數字越小越重要，就像書的目錄：</p>
+        <ul>
+          <li><code>h1</code>：書名。一個網頁通常只放一個。</li>
+          <li><code>h2</code>：章的標題。</li>
+          <li><code>h3</code>：節的標題，放在 <code>h2</code> 底下。</li>
+        </ul>
+        <p>段落用 <code>p</code>，一段文字就放進一組 <code>&lt;p&gt;</code> 和 <code>&lt;/p&gt;</code> 中間。</p>
+        <pre><code class="language-html">&lt;h1&gt;我的旅行日記&lt;/h1&gt;
+&lt;h2&gt;第一天&lt;/h2&gt;
+&lt;p&gt;今天我們到了京都。&lt;/p&gt;
+&lt;p&gt;晚上吃了很好吃的拉麵。&lt;/p&gt;</code></pre>
+        <p>這裡有一個常見的誤會。在 VS Code 裡按 Enter 換行，或打很多空白，瀏覽器都只會當成一個空白。所以要分段，就用新的 <code>p</code>。如果只想在段落裡面換行，才用 <code>br</code>。<code>br</code> 是「換行」，沒有結束標籤，直接寫一個就好：</p>
+        <pre><code class="language-html">&lt;p&gt;第一行文字&lt;br&gt;第二行文字&lt;/p&gt;</code></pre>
+        <p>想讓某段文字看起來更重要，可以用 <code>strong</code>。它預設會顯示成粗體：</p>
+        <pre><code class="language-html">&lt;p&gt;報名截止日是 &lt;strong&gt;11 月 5 日&lt;/strong&gt;，請務必準時送出。&lt;/p&gt;</code></pre>
+        <div class="compare">
+          <div class="bad">
+            <p class="compare-label">✗ 這樣不好</p>
+            <p>為了讓字變大，就把每一行都包成 <code>h1</code>；或是一直用 <code>br</code> 把文字往下推，讓它看起來像段落。</p>
+          </div>
+          <div class="good">
+            <p class="compare-label">✓ 這樣比較好</p>
+            <p>照「內容的重要程度」選標籤：章節用 <code>h2</code>，段落用 <code>p</code>，重要的字用 <code>strong</code>。字的大小和段落間距，之後交給 CSS 處理（第 4 章）。</p>
+          </div>
+        </div>
+
+        <h2>清單：把幾件事列出來</h2>
+        <p>很多時候，我們要把幾件事排成一排。HTML 有兩種清單：</p>
+        <ul>
+          <li><code>ul</code>：沒有順序的清單，前面是圓點。</li>
+          <li><code>ol</code>：有順序的清單，前面是數字。</li>
+        </ul>
+        <p>清單裡的每一項，都用 <code>li</code>（list item，清單項目）包起來。</p>
+        <p>例如「我的興趣」沒有先後順序，就用 <code>ul</code>：</p>
+        <pre><code class="language-html">&lt;h2&gt;我的興趣&lt;/h2&gt;
+&lt;ul&gt;
+    &lt;li&gt;爬山&lt;/li&gt;
+    &lt;li&gt;看電影&lt;/li&gt;
+    &lt;li&gt;做咖啡&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        <p>「泡咖啡的步驟」有先後順序，就用 <code>ol</code>：</p>
+        <pre><code class="language-html">&lt;h2&gt;泡咖啡的步驟&lt;/h2&gt;
+&lt;ol&gt;
+    &lt;li&gt;把水煮到 90 度左右&lt;/li&gt;
+    &lt;li&gt;倒入咖啡粉，悶 30 秒&lt;/li&gt;
+    &lt;li&gt;慢慢注入熱水&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p><code>li</code> 一定要放在 <code>ul</code> 或 <code>ol</code> 的裡面。如果直接把 <code>li</code> 放在頁面上，瀏覽器就不知道它是哪一份清單，排版會亂掉。</p>
+        </div>
+
+        <h2>連結：點了會跳到別的地方</h2>
+        <p>連結用 <code>a</code> 標籤（anchor，錨點）。格式是：</p>
+        <pre><code class="language-html">&lt;a href="網址"&gt;顯示的文字&lt;/a&gt;</code></pre>
+        <p><code>href</code> 是「要去哪裡」，標籤中間的文字是「讓人點的字」。例如：</p>
+        <pre><code class="language-html">&lt;a href="https://zh.wikipedia.org/"&gt;維基百科&lt;/a&gt;</code></pre>
+        <p>連結有兩種寫法：</p>
+        <ul>
+          <li><strong>連到別的網站：</strong>要寫完整網址，開頭是 <code>https://</code>。</li>
+          <li><strong>連到自己資料夾裡的另一個檔案：</strong>直接寫檔名就好，例如 <code>about.html</code>。這叫「相對路徑」，白話來說就是「從目前這個檔案出發，往旁邊找」。兩個檔案放在同一個資料夾，就不需要寫更多路徑。</li>
+        </ul>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>連到別的網站時，網址前面忘了寫 <code>https://</code>，瀏覽器會把它當成檔名，去自己的資料夾裡找，當然找不到。另外，連結文字要寫清楚。「看更多公司介紹」比「點這裡」好，因為看的人一眼就知道點下去會看到什麼。</p>
+        </div>
+        <p>連結還有一個選項 <code>target="_blank"</code>，可以讓連結在新的分頁開啟。這一章先不用，等你需要時再來用。</p>
+
+        <h2>圖片：讓網頁有照片</h2>
+        <p>圖片用 <code>img</code> 標籤。它是一個「不用結束標籤」的元素，一個標籤就能完成：</p>
+        <pre><code class="language-html">&lt;img src="images/me.jpg" alt="王小明的大頭照"&gt;</code></pre>
+        <p>這一行有兩個屬性：</p>
+        <ul>
+          <li><code>src</code>：圖片放在哪裡。這同樣是相對路徑，對應第 2 章資料夾裡的 <code>images/</code> 資料夾。也就是說，圖片要先放進 <code>images</code> 資料夾，再寫 <code>images/me.jpg</code>。</li>
+          <li><code>alt</code>：圖片的文字說明。圖片載入失敗時會顯示這段文字；看不見畫面的人，用螢幕報讀軟體時，它會把這段文字唸出來。所以要寫清楚圖片在呈現什麼。</li>
+        </ul>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>圖片沒出現，常見有三個原因：</p>
+          <ul>
+            <li>檔名大小寫不一樣。<code>Me.JPG</code> 和 <code>me.jpg</code> 在網頁上是不同的檔案。</li>
+            <li>檔案沒有放進 <code>images</code> 資料夾，或資料夾名稱寫錯。</li>
+            <li>副檔名其實是 <code>.jpeg</code> 或 <code>.png</code>，但程式碼寫成 <code>.jpg</code>。</li>
+          </ul>
+        </div>
+        <div class="callout tip">
+          <p class="callout-title">小提示</p>
+          <p>手機拍的照片常常有好幾 MB，直接放上網頁會讓頁面變慢。放進去之前，可以先把它縮小一點：Windows 用「小畫家」的「調整大小」，Mac 用「預覽程式」的「工具」→「調整大小」。圖片要顯示多大，之後會用 CSS 來調整。</p>
+        </div>
+
+        <h2>試試看：組合常用標籤</h2>
+        <p>下面這個小網頁，用到了上面介紹的標題、段落、清單和連結（試試看裡沒辦法放圖片，圖片請在練習時用自己的檔案試）。建議你動手改一改：</p>
+        <ul>
+          <li>把 <code>ul</code> 改成 <code>ol</code>，看看圓點會不會變成數字。</li>
+          <li>在清單裡新增一個 <code>li</code>，看看多了一行。</li>
+          <li>把連結的文字改成你喜歡的說法，例如「去維基百科看看」。</li>
+        </ul>
+        <div class="tryit">
+          <textarea class="tryit-code" spellcheck="false">&lt;!doctype html&gt;
+&lt;html lang="zh-Hant-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;常用標籤練習&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;我的週末計畫&lt;/h1&gt;
+    &lt;p&gt;這是我這週末想做的事情。&lt;strong&gt;最重要的是好好休息！&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;h2&gt;想做的事&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;去爬山&lt;/li&gt;
+        &lt;li&gt;看一場電影&lt;/li&gt;
+        &lt;li&gt;做一頓好吃的晚餐&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;h2&gt;晚餐步驟&lt;/h2&gt;
+    &lt;ol&gt;
+        &lt;li&gt;買好食材&lt;/li&gt;
+        &lt;li&gt;把菜洗好切好&lt;/li&gt;
+        &lt;li&gt;開火下鍋&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;p&gt;想找靈感可以去 &lt;a href="https://zh.wikipedia.org/"&gt;維基百科&lt;/a&gt; 看看。&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+        </div>
+        <p>在預覽區點連結，維基百科會直接開在右邊的小框裡。想回到你的程式，在左邊隨便改一個字（或按「重設」，但這會清掉你的修改），預覽就會恢復。</p>
+
+        <h2>表單：讓別人填資料給你</h2>
+        <p>你一定填過報名表、問卷，或是登入網站時要輸入帳號和密碼。這些需要「填寫」的畫面，在 HTML 裡都叫<strong>表單</strong>（form）。</p>
+        <p>表單由好幾個零件組成：文字框、單選鈕、下拉選單、送出按鈕。這一節我們先把每個零件認識一遍。之後的實戰範例〈部門聚餐報名表〉，就是用這些零件做出來的。</p>
+
+        <h3>表單的零件一覽</h3>
+        <div class="cards">
+          <div class="card">
+            <p class="card-icon">📦</p>
+            <h3>form 與 label</h3>
+            <p><code>form</code> 是整張表單的外框。<code>label</code> 是欄位的名稱，例如「姓名」。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">✏️</p>
+            <h3>input</h3>
+            <p>輸入框。用 <code>type</code> 屬性換種類：文字、Email、數字、單選鈕。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">🔽</p>
+            <h3>select、textarea、button</h3>
+            <p><code>select</code> 是下拉選單，<code>textarea</code> 是多行文字，<code>button</code> 是按鈕。</p>
+          </div>
+        </div>
+
+        <h3>form：整張表單的外框</h3>
+        <p><code>form</code> 把所有欄位包在一起。表單裡的欄位，都要放在 <code>&lt;form&gt;</code> 和 <code>&lt;/form&gt;</code> 中間：</p>
+        <pre><code class="language-html">&lt;form&gt;
+    &lt;!-- 姓名、Email、送出按鈕…都放在這裡面 --&gt;
+&lt;/form&gt;</code></pre>
+
+        <h3>label：欄位的名稱</h3>
+        <p><code>label</code> 是欄位旁邊的文字，告訴填寫的人這格要寫什麼。它的內容就是你平常看到的字：</p>
+        <pre><code class="language-html">&lt;label for="name"&gt;姓名&lt;/label&gt;</code></pre>
+        <p><code>for</code> 屬性很重要，下一段會再說明。</p>
+
+        <h3>input：輸入框，用 type 換種類</h3>
+        <p><code>input</code> 是真正讓人輸入的地方。它的種類由 <code>type</code> 屬性決定：</p>
+        <ul>
+          <li><code>type="text"</code>：一般文字，例如姓名。</li>
+          <li><code>type="email"</code>：Email。瀏覽器會檢查有沒有 <code>@</code> 符號。</li>
+          <li><code>type="number"</code>：數字，例如人數。</li>
+          <li><code>type="radio"</code>：單選鈕，圓圈形狀，一次只能選一個。</li>
+        </ul>
+        <pre><code class="language-html">&lt;input type="text"&gt;
+&lt;input type="email"&gt;
+&lt;input type="number"&gt;</code></pre>
+        <p><code>input</code> 是沒有結束標籤的元素，像 <code>img</code> 和 <code>br</code> 一樣，寫一個標籤就好，不用再寫 <code>&lt;/input&gt;</code>。</p>
+
+        <h3>select 與 option：下拉選單</h3>
+        <p>要讓人從幾個選項裡挑一個，用下拉選單。<code>select</code> 是選單本身，每個選項用 <code>option</code> 來寫：</p>
+        <pre><code class="language-html">&lt;select&gt;
+    &lt;option&gt;行銷&lt;/option&gt;
+    &lt;option&gt;業務&lt;/option&gt;
+    &lt;option&gt;研發&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+        <h3>textarea：多行文字</h3>
+        <p>留言、備註通常會寫好幾行，要用 <code>textarea</code>。它跟 <code>input</code> 不同，要有結束標籤：</p>
+        <pre><code class="language-html">&lt;textarea&gt;&lt;/textarea&gt;</code></pre>
+
+        <h3>button：送出按鈕</h3>
+        <p>按鈕的文字寫在標籤中間：</p>
+        <pre><code class="language-html">&lt;button type="submit"&gt;送出&lt;/button&gt;</code></pre>
+
+        <h3>label 的 for 要和 input 的 id 一樣</h3>
+        <p>這是表單最重要的一個觀念。在 <code>input</code> 上加一個 <code>id</code>，再到 <code>label</code> 的 <code>for</code> 寫一模一樣的名字，兩者就連起來了：</p>
+        <pre><code class="language-html">&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input type="email" id="email"&gt;</code></pre>
+        <p>連起來之後有兩個好處：</p>
+        <ul>
+          <li><strong>點文字也能選到欄位。</strong>點「Email」這兩個字，游標會直接跳進輸入框，不用精準地點小格子。</li>
+          <li><strong>螢幕報讀軟體知道這格是什麼。</strong>看不見畫面的人，聽到的會是「Email，編輯區」，而不是只聽到一個空白的格子。</li>
+        </ul>
+
+        <div class="compare">
+          <div class="bad">
+            <p class="compare-label">✗ 這樣不好</p>
+            <p><code>&lt;p&gt;Email&lt;/p&gt;</code></p>
+            <p><code>&lt;input type="email"&gt;</code></p>
+            <p>文字和輸入框是兩個獨立的東西。點「Email」沒有反應，報讀軟體也不知道這格是什麼。</p>
+          </div>
+          <div class="good">
+            <p class="compare-label">✓ 這樣比較好</p>
+            <p><code>&lt;label for="email"&gt;Email&lt;/label&gt;</code></p>
+            <p><code>&lt;input type="email" id="email"&gt;</code></p>
+            <p>用 <code>for</code> 和 <code>id</code> 連起來，點文字就能選到欄位，報讀軟體也知道這格是什麼。</p>
+          </div>
+        </div>
+
+        <h3>radio：單選鈕要用同一個 name</h3>
+        <p>單選鈕的特色是「多選一」，例如葷食或素食只能選一種。要讓瀏覽器知道這幾個圓圈是同一組，它們必須有<strong>相同的 <code>name</code></strong>：</p>
+        <pre><code class="language-html">&lt;label&gt;&lt;input type="radio" name="diet"&gt; 葷&lt;/label&gt;
+&lt;label&gt;&lt;input type="radio" name="diet"&gt; 素&lt;/label&gt;</code></pre>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>如果兩個單選鈕的 <code>name</code> 不一樣，它們就變成各自獨立的圓圈，可以同時都選。看到這種情況，先檢查 <code>name</code> 是不是寫一樣。</p>
+        </div>
+
+        <h3>required 與 placeholder</h3>
+        <p>輸入框還有兩個常用的屬性：</p>
+        <ul>
+          <li><code>required</code>：必填。沒填就按送出，瀏覽器會跳出提醒，表單不會送出。寫上這個字就好，不需要寫值。</li>
+          <li><code>placeholder</code>：輸入框裡的灰色提示字，例如「請輸入 Email」。它只是提示，輸入後就會消失。</li>
+        </ul>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>不能用 <code>placeholder</code> 取代 <code>label</code>。填寫的人一開始輸入，提示字就不見了，忘記這格是什麼。欄位的名稱一定要用 <code>label</code> 寫出來。</p>
+        </div>
+
+        <div class="callout note">
+          <p class="callout-title">補充</p>
+          <p>現在按下表單的「送出」，頁面只會重新載入一次（網址後面可能多出一串你填的文字），資料不會傳到任何地方。要讓表單真的做事，例如把資料存起來、顯示「報名成功」，需要學 JavaScript。第 5 章學完後，我們會在實戰範例裡處理。</p>
+        </div>
+
+        <h2>試試看：做一張小表單</h2>
+        <p>下面是一張「部門聚餐調查」的表單。試著點一下「姓名」兩個字，看游標會不會跳進輸入框；再點「葷」和「素」，確認一次只能選一個。也可以把其中一個單選鈕的 <code>name</code> 改掉，看看會發生什麼事。</p>
+        <div class="tryit">
+          <textarea class="tryit-code" spellcheck="false">&lt;!doctype html&gt;
+&lt;html lang="zh-Hant-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;部門聚餐調查&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;部門聚餐調查&lt;/h1&gt;
+    &lt;form&gt;
+        &lt;p&gt;
+            &lt;label for="name"&gt;姓名&lt;/label&gt;
+            &lt;input type="text" id="name" required&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;label for="email"&gt;Email&lt;/label&gt;
+            &lt;input type="email" id="email"&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;label for="people"&gt;參加人數&lt;/label&gt;
+            &lt;input type="number" id="people" min="1" max="10"&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            飲食需求：
+            &lt;label&gt;&lt;input type="radio" name="diet"&gt; 葷&lt;/label&gt;
+            &lt;label&gt;&lt;input type="radio" name="diet"&gt; 素&lt;/label&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;label for="dept"&gt;部門&lt;/label&gt;
+            &lt;select id="dept"&gt;
+                &lt;option&gt;行銷&lt;/option&gt;
+                &lt;option&gt;業務&lt;/option&gt;
+                &lt;option&gt;研發&lt;/option&gt;
+                &lt;option&gt;人資&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;label for="memo"&gt;備註&lt;/label&gt;
+            &lt;textarea id="memo"&gt;&lt;/textarea&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;button type="submit"&gt;送出&lt;/button&gt;
+        &lt;/p&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+        </div>
+        <p>在預覽區按「送出」不會有任何反應，也看不到「必填」的提醒。這是預覽區的安全限制，不是你寫錯了。想看 <code>required</code> 的效果，可以在練習時用自己的檔案試：不填姓名就按送出，瀏覽器會跳出提醒。</p>
+
+        <h2>跟 AI 一起做：請 AI 產生頁面，再自己認標籤</h2>
+        <div class="callout ai">
+          <p class="callout-title">跟 AI 一起做</p>
+          <p>AI 幾秒鐘就能寫出一頁 HTML。但你要看得懂它寫了什麼，才知道對不對、要怎麼改。建議的方法是三步：</p>
+          <ol>
+            <li><strong>請 AI 產生。</strong>把需求說清楚，讓 AI 寫出 HTML。</li>
+            <li><strong>存成檔案，用 Live Server 打開。</strong>在 <code>my-first-web</code> 裡新增一個檔案，例如 <code>ai-test.html</code>，把內容貼進去。不要直接貼進 <code>index.html</code>，免得蓋掉你自己寫的內容。</li>
+            <li><strong>用開發者工具「檢查」。</strong>在畫面上的每一塊按右鍵，選「檢查」，對照 Elements 裡的那一行，看它是哪個標籤。</li>
+          </ol>
+        </div>
+
+        <p>下面是一段可以直接複製的提示詞，請 AI 幫你做一個自我介紹網頁：</p>
+        <div class="prompt">
+          <p class="prompt-label">對 AI 這樣說</p>
+          <p class="prompt-text">請幫我寫一個自我介紹網頁，只用 HTML，不要 CSS 和 JavaScript。內容要有：我的名字當大標題、一段自我介紹、一個「我的興趣」清單（3 項）、一張照片（檔案在 images/me.jpg）、一個連到公司網站的連結。請在每個區塊上面加中文註解，說明用了什麼標籤、為什麼。</p>
+        </div>
+
+        <p>提示詞寫法不同，AI 給的結果也不一樣：</p>
+        <div class="compare">
+          <div class="bad">
+            <p class="compare-label">✗ 這樣不好</p>
+            <p>「幫我做一個網頁」</p>
+            <p>範圍太大，AI 可能會加上一堆 CSS 和 JavaScript，還有你還沒學過的標籤，看不懂也不知道要不要留下。</p>
+          </div>
+          <div class="good">
+            <p class="compare-label">✓ 這樣比較好</p>
+            <p>說清楚三件事：<strong>只要 HTML</strong>、<strong>要哪些內容</strong>、<strong>要中文註解</strong>。</p>
+            <p>範圍清楚，結果就容易檢查，也容易對照本章學過的標籤。</p>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>AI 有時候會塞進你沒要的 CSS 或 JavaScript，或用你還沒學過的標籤。遇到看不懂的地方，直接問它「這一行是什麼意思」，或「這個標籤可以不用嗎」。不要整段照貼，貼上去之前，先確認每一行你都能解釋。</p>
+        </div>
+
+        <h2>重點回顧</h2>
+        <ul>
+          <li><strong>標籤與巢狀：</strong>網頁是由標籤一層包一層組成的。標籤要成對，裡面的標籤要在外面的標籤裡面關好。</li>
+          <li><strong>屬性：</strong>在開始標籤裡加的設定，例如 <code>href</code>、<code>src</code>、<code>alt</code>、<code>type</code>。</li>
+          <li><strong>骨架：</strong><code>head</code> 放看不見的設定（例如標題、編碼），<code>body</code> 放畫面上看得見的內容。</li>
+          <li><strong>常用標籤：</strong>標題 <code>h1</code>–<code>h3</code>、段落 <code>p</code>、清單 <code>ul</code>/<code>ol</code>/<code>li</code>、連結 <code>a</code>、圖片 <code>img</code>。</li>
+          <li><strong>表單：</strong><code>label</code> 的 <code>for</code> 要和 <code>input</code> 的 <code>id</code> 一樣，才能把文字和欄位連起來。</li>
+          <li><strong>請 AI 寫完，要自己看懂：</strong>一行一行對照，看不懂的地方就問，不要整段照貼。</li>
+        </ul>
+      </article>
+
+      <section class="exercise">
+        <h2>動手做</h2>
+        <p>把第 2 章做的自我介紹頁，擴充成一個完整的內容頁。</p>
+        <ol>
+          <li><strong>建立 images 資料夾，放照片。</strong>在 <code>my-first-web</code> 裡新增一個資料夾，名稱是 <code>images</code>。放一張你自己的照片，或任何你喜歡的圖片，並改名為 <code>me.jpg</code>。如果你的檔案是 png，就改名為 <code>me.png</code>，下一步的 <code>src</code> 也要跟著改。</li>
+          <li><strong>在 h1 下面加一張圖片。</strong>用 <code>img</code> 標籤，<code>src</code> 寫 <code>images/me.jpg</code>，並記得加上 <code>alt</code> 屬性，寫一段圖片的文字說明。</li>
+          <li><strong>加「我的興趣」清單。</strong>新增一個 <code>h2</code>，文字是「我的興趣」。下面接一個 <code>ul</code>，裡面至少放 3 個 <code>li</code>。</li>
+          <li><strong>加「工作上的我」段落。</strong>新增一個 <code>h2</code>，文字是「工作上的我」。下面寫一段 <code>p</code>，並用 <code>strong</code> 標出一個重點。</li>
+          <li><strong>加一個連結。</strong>用 <code>a</code> 標籤，連到公司網站或你常用的網站。記得 <code>href</code> 要寫完整的網址，開頭是 <code>https://</code>。</li>
+          <li><strong>存檔，看結果。</strong>按 <kbd>Ctrl</kbd> + <kbd>S</kbd>（Mac 是 <kbd>⌘</kbd> + <kbd>S</kbd>），用 Live Server 看畫面。打開開發者工具的 Elements 面板，找到你剛加的 <code>img</code>、<code>ul</code> 和 <code>a</code>，確認它們都在。</li>
+          <li><strong>加分題：留一張表單。</strong>在最下面加一個 <code>h2</code>，文字是「留言給我」。下面做一張小表單，有姓名（<code>input</code>）、留言（<code>textarea</code>）和送出按鈕（<code>button</code>）。每個輸入框都要用 <code>label</code> 和 <code>for</code>、<code>id</code> 連起來。最後幫姓名加上 <code>required</code>，存檔後不填姓名按送出，看看瀏覽器的提醒。</li>
+        </ol>
+
+        <details>
+          <summary>參考答案</summary>
+          <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-Hant-TW"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;王小明的自我介紹&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;王小明&lt;/h1&gt;
+    &lt;img src="images/me.jpg" alt="王小明的大頭照"&gt;
+    &lt;p&gt;我是行政部的同事，很高興認識大家，請多指教！&lt;/p&gt;
+
+    &lt;h2&gt;我的興趣&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;爬山&lt;/li&gt;
+        &lt;li&gt;看電影&lt;/li&gt;
+        &lt;li&gt;做咖啡&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;h2&gt;工作上的我&lt;/h2&gt;
+    &lt;p&gt;我負責公司的&lt;strong&gt;採購與庶務&lt;/strong&gt;，有需要辦公用品或安排會議室，都可以找我。&lt;/p&gt;
+
+    &lt;p&gt;我常用 &lt;a href="https://zh.wikipedia.org/"&gt;維基百科&lt;/a&gt; 查資料。&lt;/p&gt;
+
+    &lt;h2&gt;留言給我&lt;/h2&gt;
+    &lt;form&gt;
+        &lt;p&gt;
+            &lt;label for="guest-name"&gt;姓名&lt;/label&gt;
+            &lt;input type="text" id="guest-name" required&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;label for="guest-message"&gt;留言&lt;/label&gt;
+            &lt;textarea id="guest-message"&gt;&lt;/textarea&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;button type="submit"&gt;送出&lt;/button&gt;
+        &lt;/p&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </details>
+
+        <details>
+          <summary>圖片沒出現，或版面怪怪的？</summary>
+          <ul>
+            <li><strong>圖片檔名或副檔名不符：</strong>先確認副檔名有顯示出來。Windows 在檔案總管的「檢視」→「顯示」勾選「副檔名」；Mac 在 Finder 的「設定」→「進階」勾選「顯示所有檔案副檔名」。檔案其實是 <code>me.jpg.png</code> 或 <code>me.png</code>，但程式碼寫的是 <code>me.jpg</code>，就會找不到。</li>
+            <li><strong>圖片不在 images 資料夾：</strong>圖片要放在 <code>my-first-web/images/</code> 裡面，<code>src</code> 寫 <code>images/me.jpg</code>，資料夾名稱和檔名都要一樣。</li>
+            <li><strong>標籤忘了結束：</strong>某個標籤沒有關上，後面的內容就全部變成標題或粗體。用 VS Code 檢查，每個開始標籤都要有對應的結束標籤，例如 <code>&lt;h2&gt;</code> 要有 <code>&lt;/h2&gt;</code>。</li>
+            <li><strong>中文變成亂碼：</strong>確認檔案開頭的 <code>head</code> 裡有 <code>&lt;meta charset="UTF-8"&gt;</code>，而且 VS Code 右下角的編碼是 UTF-8。</li>
+          </ul>
+        </details>
+      </section>
+
+      <div class="read-mark" id="read-mark"></div>   <!-- site.js 填入「標記為已讀」 -->
+      <nav class="pager" id="pager" aria-label="上一篇與下一篇"></nav>  <!-- site.js 填入 -->
+    </main>
+    <aside class="toc" id="toc" aria-label="本頁目錄"></aside>   <!-- site.js 填入 -->
+  </div>
+  <script src="../assets/js/nav-data.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>

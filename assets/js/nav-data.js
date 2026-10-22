@@ -6,7 +6,7 @@ window.SITE_NAV = [
     items: [
       { id: 'basics/01-what-is-web', title: '網頁是什麼？', minutes: 30, ready: true },
       { id: 'basics/02-tools', title: '準備工具', minutes: 40, ready: true },
-      { id: 'basics/03-html', title: 'HTML：網頁的骨架', minutes: 60, ready: false },
+      { id: 'basics/03-html', title: 'HTML：網頁的骨架', minutes: 60, ready: true },
       { id: 'basics/04-css', title: 'CSS：網頁的衣服', minutes: 80, ready: false },
       { id: 'basics/05-javascript', title: 'JavaScript：網頁的動作', minutes: 100, ready: false },
       { id: 'basics/06-work-with-ai', title: '跟 AI 一起寫網頁', minutes: 80, ready: false },

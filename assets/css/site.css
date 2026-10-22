@@ -1319,3 +1319,12 @@ button {
 .card .copy-btn {
   display: none;
 }
+
+/* 程式碼字型關掉連字：JetBrains Mono 會把 <!-- --> => 畫成箭頭，新手照著打會打錯 */
+code,
+kbd,
+pre,
+.tryit-code {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
