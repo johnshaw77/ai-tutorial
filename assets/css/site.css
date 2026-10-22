@@ -979,6 +979,11 @@ pre code {
   margin: 1.8em 0;
 }
 
+/* 只有兩張卡時改成兩欄，避免右邊空一格 */
+.cards:has(> .card:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .card {
   padding: 20px 18px;
   background: var(--c-surface);

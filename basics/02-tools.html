@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1280">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A7%A9%3C/text%3E%3C/svg%3E">
+  <title>準備工具｜AI Web 開發入門</title>
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body data-page="basics/02-tools" data-root="../">
+  <div class="layout">
+    <nav class="sidebar" id="sidebar" aria-label="課程目錄"></nav>   <!-- site.js 填入 -->
+    <main class="content">
+      <header class="page-header">
+        <p class="eyebrow">網頁基礎 · 第 2 章</p>
+        <h1>準備工具</h1>
+        <p class="lead">工欲善其事，必先利其器。這一章把瀏覽器、開發者工具和 VS Code 準備好，並建立你的第一個作品資料夾。</p>
+        <p class="meta"><span>閱讀 15 分</span><span>安裝與練習 25 分</span></p>
+      </header>
+
+      <section class="goals">
+        <h2>學完這篇，你會</h2>
+        <ul>
+          <li>會打開瀏覽器的開發者工具，看懂 Elements 和 Console 是做什麼的。</li>
+          <li>裝好 VS Code，並完成中文介面、自動儲存、Live Server 三個設定。</li>
+          <li>建立自己的作品資料夾，用 VS Code 寫出第一個 <code>index.html</code>。</li>
+        </ul>
+      </section>
+
+      <article class="article">
+        <h2>這一章要準備的三樣工具</h2>
+        <p>上一章我們用記事本寫出了第一個網頁。要繼續往下做，先把工具準備好，之後每一章都會用到。</p>
+        <div class="cards">
+          <div class="card">
+            <p class="card-icon">🌐</p>
+            <h3>Chrome 瀏覽器</h3>
+            <p>看網頁的地方。你寫的網頁最後都要在這裡打開。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">🔍</p>
+            <h3>開發者工具</h3>
+            <p>藏在瀏覽器裡的透視鏡，可以看任何網頁是怎麼做的，也是找錯誤的好幫手。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">📝</p>
+            <h3>VS Code</h3>
+            <p>寫網頁的編輯器。比記事本聰明很多，會幫你上色、提醒、自動補完。</p>
+          </div>
+        </div>
+
+        <h2>瀏覽器：用 Chrome 看你的網頁</h2>
+        <p>瀏覽器就是你平常用來「看網頁」的程式，例如 Chrome、Edge、Safari。上一章說過，瀏覽器會把網頁檔案畫成你看到的畫面。</p>
+        <p>本課建議統一用 <strong>Chrome</strong>。原因很簡單：教學裡的步驟和按鈕名稱都是照 Chrome 寫的，你用同一個，跟著做時畫面才會一樣，比較不會迷路。</p>
+        <p>Edge 也可以。Edge 和 Chrome 的核心相同，操作幾乎一樣，只是外觀不同。</p>
+        <div class="callout tip">
+          <p class="callout-title">小提示</p>
+          <p>公司電腦如果不能自行安裝軟體，直接用 Edge 就好。本課的步驟在 Edge 上也能照做。</p>
+        </div>
+
+        <h2>開發者工具：網頁的透視鏡</h2>
+        <p>你有沒有想過，一個網頁到底是怎麼排出來的？瀏覽器裡藏了一個工具，可以把網頁的引擎蓋打開，看裡面的零件，這就是<strong>開發者工具</strong>。</p>
+        <p>它像汽車的引擎蓋，或醫院的 X 光：不用改任何東西，就能看到網頁底下的 HTML（骨架）和 CSS（外觀）。而且，你可以打開<strong>任何一個網頁</strong>來看，不限於自己做的。</p>
+
+        <h3>怎麼打開？</h3>
+        <p>有兩種方法，任選一種：</p>
+        <ul>
+          <li><strong>用滑鼠：</strong>在網頁上按右鍵，選「檢查」。</li>
+          <li><strong>用快捷鍵：</strong>Windows 按 <kbd>F12</kbd>，或按 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd>；Mac 按 <kbd>⌥ Option</kbd>+<kbd>⌘ Command</kbd>+<kbd>I</kbd>。</li>
+        </ul>
+        <p>打開後，畫面的一側或下方會出現一塊面板。上面有很多分頁，我們先認識最常用的兩個。</p>
+
+        <div class="cards">
+          <div class="card">
+            <p class="card-icon">🔍</p>
+            <h3>Elements（元素）</h3>
+            <p>看網頁的 HTML 結構。滑鼠移到某一行，畫面上對應的地方會亮起來。右邊還會看到這個元素的 CSS 樣式。</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">🚨</p>
+            <h3>Console（主控台）</h3>
+            <p>看錯誤訊息。出錯時會出現<strong>紅字</strong>，紅字就是網頁在告訴你哪裡壞了。第 7 章會再細講。</p>
+          </div>
+        </div>
+        <p>這裡只先介紹這兩個，因為它們是新手最常用的。其他分頁等需要時再說。</p>
+
+        <h3>動手試一試：改一下新聞標題</h3>
+        <p>這個小實驗只要四步，你會發現原來網頁是可以「改」的。</p>
+        <ol class="flow">
+          <li><strong>打開新聞網站</strong><span>隨便挑一個新聞網站，例如你平常會看的入口網站。</span></li>
+          <li><strong>檢查標題</strong><span>在任一則新聞標題上按右鍵，選「檢查」。</span></li>
+          <li><strong>雙擊改字</strong><span>在 Elements 面板裡，雙擊標題那行的文字，改成你自己的名字。</span></li>
+          <li><strong>按 Enter 看變化</strong><span>按下 Enter，回頭看網頁，標題已經變成你的名字了。</span></li>
+        </ol>
+        <div class="callout note">
+          <p class="callout-title">補充</p>
+          <p>這只改了<strong>你自己電腦上的畫面</strong>，別人看不到，也不會真的改到那個新聞網站。重新整理頁面（按 <kbd>F5</kbd>），畫面就會恢復原樣。所以不用怕弄壞。</p>
+        </div>
+
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>不要把你在 Console 裡貼上陌生人給的程式碼。有些人會用這招騙走帳號。這門課只會叫你貼課程裡提供的內容，其他一律不要貼。</p>
+        </div>
+
+        <h2>VS Code：寫網頁的筆記本</h2>
+        <p>上一章我們用記事本就能寫網頁。但記事本只是純文字，不會幫你上色，也不會提醒你少打了一個符號。</p>
+        <p>所以工程師通常會用專門的編輯器。這一課我們用的是 <strong>VS Code</strong>（全名 Visual Studio Code）。它有三個好處：</p>
+        <ul>
+          <li><strong>會上色：</strong>標籤、文字、符號都用不同顏色標示，一眼就看得出結構。</li>
+          <li><strong>會自動補完：</strong>打到一半會跳出建議，少打字，也少出錯。</li>
+          <li><strong>可以看整個資料夾：</strong>一個網站有好幾個檔案，全部列在左邊，不用一個一個找。</li>
+        </ul>
+        <p>VS Code 是微軟出品，<strong>免費</strong>，很多工程師每天都在用。</p>
+
+        <h3>安裝步驟</h3>
+        <ol>
+          <li><strong>打開官網</strong>：<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">https://code.visualstudio.com/</a>，點下載按鈕。</li>
+          <li><strong>Windows 使用者</strong>：選 <strong>User Installer</strong>。這個版本通常不需要系統管理員權限。安裝過程中，建議勾選「加入到檔案總管的右鍵選單（以 Code 開啟）」，之後在資料夾上按右鍵就能快速打開。</li>
+          <li><strong>Mac 使用者</strong>：下載後，把 <strong>Visual Studio Code</strong> 拖進「應用程式」資料夾。</li>
+          <li><strong>打開看看</strong>：看到歡迎畫面，就代表安裝成功了。</li>
+        </ol>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>公司電腦如果被擋、或安裝時跳出權限要求，請先找 IT 同仁協助。不要自己去找來路不明的安裝檔，以免電腦出問題。</p>
+        </div>
+
+        <h2>認識 VS Code 的畫面</h2>
+        <p>第一次打開會覺得畫面很多。先認識下面四個區域就夠了：</p>
+        <ul>
+          <li><strong>左邊最窄的一條：活動列。</strong>上面是一排圖示。點像文件的圖示，可以打開「檔案總管」；下一節會用到的「擴充功能」，圖示是四個方塊。</li>
+          <li><strong>活動列旁邊：側邊欄。</strong>顯示你目前資料夾裡有哪些檔案，跟在檔案總管看到的一樣。</li>
+          <li><strong>中間最大的區域：編輯區。</strong>你寫程式的地方。可以同時開好幾個檔案，每個檔案會變成上方的一個分頁，點分頁就能切換。</li>
+          <li><strong>最下面一條：狀態列。</strong>顯示目前檔案的一些資訊，例如右下角會寫著使用的語言。</li>
+        </ul>
+
+        <h2>三個讓新手輕鬆很多的設定</h2>
+        <p>裝好以後，先做下面三個設定，之後會省下很多麻煩。</p>
+
+        <h3>安裝擴充功能的共同步驟</h3>
+        <p>VS Code 的「擴充功能」就像手機上的 App，可以加上新的功能。下面 (a)、(c) 會用到，安裝方法都一樣：</p>
+        <ol class="flow">
+          <li><strong>點擴充功能圖示</strong><span>左邊活動列上，四個小方塊的圖示。</span></li>
+          <li><strong>搜尋名稱</strong><span>在上方搜尋框輸入要裝的名稱。</span></li>
+          <li><strong>確認作者</strong><span>看清楚作者是不是正確的那一位。</span></li>
+          <li><strong>按安裝</strong><span>等它裝完，依提示重新啟動 VS Code。</span></li>
+        </ol>
+        <p>也可以用快捷鍵直接打開擴充功能：Windows 按 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>，Mac 按 <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>。</p>
+        <div class="callout warn">
+          <p class="callout-title">常見錯誤</p>
+          <p>同名的擴充功能很多，有些是假冒的。請認明<strong>下載數多、作者正確</strong>的那一個，再按安裝。</p>
+        </div>
+
+        <h3>(a) 把介面換成中文</h3>
+        <p>預設是英文畫面。依照上面的步驟，搜尋 <code>Chinese (Traditional) Language Pack</code>，作者是 Microsoft，按安裝，然後重新啟動。重新打開後，選單和按鈕就會變成中文。</p>
+
+        <h3>(b) 打開自動儲存</h3>
+        <p>在選單列點「檔案」，勾選「自動儲存」。勾選後，VS Code 會自動幫你存檔。</p>
+        <div class="callout tip">
+          <p class="callout-title">小提示</p>
+          <p>新手最常遇到的問題是「我改了，怎麼畫面沒變？」，多半是忘記存檔。檔案沒存，瀏覽器看到的還是舊的內容。打開自動儲存，改完字停一下就會自動存，比較不會卡住。</p>
+        </div>
+
+        <h3>(c) 安裝 Live Server</h3>
+        <p>Live Server 是一個「即時預覽」的工具，作者是 Ritwick Dey。依照上面的步驟，搜尋 <code>Live Server</code> 並安裝。裝好以後：</p>
+        <ol>
+          <li>在 HTML 檔案上按右鍵，選「Open with Live Server」。</li>
+          <li>瀏覽器會自動打開網頁。</li>
+          <li>之後每次存檔，畫面都會自動更新，不用自己按重新整理。</li>
+        </ol>
+        <p>瀏覽器網址列會出現類似 <code>http://127.0.0.1:5500/index.html</code> 的網址。這是「只有你的電腦看得到」的位址，別人打不開，可以放心練習。</p>
+        <div class="callout note">
+          <p class="callout-title">補充</p>
+          <p>不裝 Live Server 也可以。直接雙擊 HTML 檔，用瀏覽器打開就好。差別是每次改完存檔，都要自己在瀏覽器按 <kbd>F5</kbd>（Mac 是 <kbd>⌘</kbd>+<kbd>R</kbd>）重新整理。</p>
+        </div>
+
+        <h2>整理資料夾的好習慣</h2>
+        <p>寫網頁會產生很多檔案。從一開始就把它們放在同一個地方，之後才找得到。本課的所有作品，都請放在同一個資料夾裡，例如桌面上的 <code>my-first-web</code>。</p>
+
+        <p>檔名也有幾個小規則：</p>
+        <ul>
+          <li>全部用<strong>英文小寫</strong>。</li>
+          <li><strong>不要有空白</strong>，也<strong>不要用中文</strong>。</li>
+          <li>單字之間用<strong>連字號</strong> <code>-</code> 連起來，不要用底線或空白。</li>
+        </ul>
+
+        <div class="compare">
+          <div class="bad">
+            <p class="compare-label">✗ 這樣不好</p>
+            <p><code>我的 網頁(最終版).HTML</code></p>
+          </div>
+          <div class="good">
+            <p class="compare-label">✓ 這樣比較好</p>
+            <p><code>about-me.html</code></p>
+          </div>
+        </div>
+
+        <p>為什麼要這麼講究？因為網頁放上網路後，中文和空白在網址裡會變成一串像 <code>%E6%88%91...</code> 的亂碼，連結很容易壞掉。另外，<code>Index.HTML</code> 和 <code>index.html</code> 在網路上會被當成兩個不同的檔案，大小寫一不小心就出錯。</p>
+
+        <p>首頁的檔名一定要叫 <code>index.html</code>。它就像網站的大門，瀏覽器打開一個網站時，預設就是找這個檔案。</p>
+
+        <p>整門課做完時，你的資料夾大致會長這樣（之後的章節會慢慢加入 <code>style.css</code> 和 <code>images/</code>）：</p>
+        <pre><code>my-first-web/
+        ├── index.html      ← 首頁（網站的大門）
+        ├── style.css       ← 之後會加入
+        └── images/         ← 之後會加入（放圖片）</code></pre>
+
+        <h2>用 VS Code 打開資料夾，寫第一個檔案</h2>
+        <p>我們已經在本章前面裝好 VS Code。接下來用它打開剛剛建立的資料夾，並建立第一個檔案。</p>
+        <ol>
+          <li>打開 VS Code，點選上方選單的「檔案」→「開啟資料夾」，選擇桌面上的 <code>my-first-web</code>，按「開啟」。</li>
+          <li>在左邊的「檔案總管」（就是最上面那個像文件的圖示）中，點選空白處的「新增檔案」圖示，輸入 <code>index.html</code>，按 Enter。</li>
+          <li>點開 <code>index.html</code>，在空白的檔案裡輸入一個驚嘆號 <kbd>!</kbd>，再按 <kbd>Tab</kbd>（或 <kbd>Enter</kbd>）。VS Code 會自動幫你產生一份網頁的骨架。</li>
+          <li>把 <code>&lt;html lang="en"&gt;</code> 那一行的 <code>lang="en"</code> 改成 <code>lang="zh-Hant-TW"</code>，這樣瀏覽器就知道這是繁體中文的網頁。</li>
+          <li>把 <code>&lt;title&gt;</code> 裡的 <code>Document</code> 換成網頁標題（會顯示在瀏覽器分頁上），再到 <code>&lt;body&gt;</code> 和 <code>&lt;/body&gt;</code> 中間寫要顯示在畫面上的內容。</li>
+        </ol>
+
+        <p>VS Code 產生出來的內容長這樣：</p>
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+        &lt;head&gt;
+            &lt;meta charset="UTF-8"&gt;
+            &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+            &lt;title&gt;Document&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+
+        &lt;/body&gt;
+        &lt;/html&gt;</code></pre>
+
+        <div class="callout tip">
+          <p class="callout-title">小提示</p>
+          <p>這份骨架看不懂沒關係，大部分人第一次看都會覺得一頭霧水。第 3 章會一行一行拆開來解釋，現在只要知道：這是網頁的標準起點，每個網頁都長得差不多。</p>
+        </div>
+
+        <h2>跟 AI 一起做：卡關時怎麼問</h2>
+        <div class="callout ai">
+          <p class="callout-title">跟 AI 一起做</p>
+          <p>安裝工具和設定環境，是新手最容易卡住的地方。畫面和選單常常因為版本或電腦不同而不一樣，看文章找不到對應的步驟很正常。這時候 AI 很適合幫你排除問題。</p>
+          <p>好的提問要包含四件事：</p>
+          <ul>
+            <li><strong>作業系統</strong>：Windows 11，還是 macOS。</li>
+            <li><strong>你在做哪一步</strong>：例如「在 VS Code 安裝 Live Server」。</li>
+            <li><strong>畫面上出現的完整訊息</strong>：可以直接截圖貼給 AI。截圖前先看一下，畫面上不要有公司機密或同事的個人資料。</li>
+            <li><strong>你已經試過什麼</strong>：免得 AI 叫你做一樣的事。</li>
+          </ul>
+        </div>
+        <p>下面是一個好的提問範例，你可以照著改成自己的情況：</p>
+        <div class="prompt">
+          <p class="prompt-label">對 AI 這樣說</p>
+          <p class="prompt-text">我用 Windows 11，在 VS Code 安裝 Live Server 後，對 index.html 按右鍵沒有出現 Open with Live Server。我已經重新啟動過 VS Code。請一步一步告訴我可能的原因和檢查方法，用新手聽得懂的話。</p>
+        </div>
+        <p>再比較一個不太好的問法：</p>
+        <div class="compare">
+          <div class="bad">
+            <p class="compare-label">✗ 這樣不好</p>
+            <p>「Live Server 不能用怎麼辦」</p>
+          </div>
+          <div class="good">
+            <p class="compare-label">✓ 這樣比較好</p>
+            <p>「我用 Windows 11，對 index.html 按右鍵沒有 Open with Live Server，我已經重新啟動 VS Code。請一步一步告訴我可能原因。」</p>
+          </div>
+        </div>
+
+        <h2>重點回顧</h2>
+        <ul>
+          <li>用 Chrome 和開發者工具看網頁，用 VS Code 寫網頁，兩者都要先裝好並完成設定（Live Server 等三個設定）。</li>
+          <li>作品統一放在同一個資料夾（例如 <code>my-first-web</code>），檔名用英文小寫加連字號，首頁一定叫 <code>index.html</code>。</li>
+          <li>在 VS Code 空白檔案輸入 <code>!</code> 再按 <kbd>Tab</kbd>，就能產生網頁骨架，記得把 <code>lang</code> 改成 <code>zh-Hant-TW</code>。</li>
+          <li>卡關時請 AI 幫忙，問題要寫清楚作業系統、步驟、完整訊息和你試過的做法。</li>
+        </ul>
+      </article>
+
+      <section class="exercise">
+        <h2>動手做</h2>
+        <p>我們要開始做你的第一個作品：<strong>我的自我介紹頁</strong>。之後每一章都會把它再擴充一點。</p>
+        <ol>
+          <li>
+            <strong>在桌面建立資料夾。</strong>在桌面按右鍵，選「新增」→「資料夾」（Mac 是「新增資料夾」），名稱輸入 <code>my-first-web</code>。
+          </li>
+          <li>
+            <strong>用 VS Code 打開它，新增 index.html。</strong>在 VS Code 選「檔案」→「開啟資料夾」，選 <code>my-first-web</code>。接著在檔案總管點「新增檔案」，輸入 <code>index.html</code>。
+          </li>
+          <li>
+            <strong>產生骨架，改語言與標題。</strong>在檔案裡輸入 <kbd>!</kbd> 再按 <kbd>Tab</kbd>。把 <code>lang</code> 改成 <code>zh-Hant-TW</code>，<code>&lt;title&gt;</code> 改成「王小明的自我介紹」（請換成你自己的名字）。
+          </li>
+          <li>
+            <strong>寫上你的名字和一句介紹。</strong>在 <code>&lt;body&gt;</code> 裡面，加一行 <code>&lt;h1&gt;</code> 寫你的名字，再加一行 <code>&lt;p&gt;</code> 寫一句自我介紹。
+          </li>
+          <li>
+            <strong>打開看看。</strong>存檔（Windows 按 <kbd>Ctrl</kbd> + <kbd>S</kbd>，Mac 按 <kbd>⌘</kbd> + <kbd>S</kbd>）。在 VS Code 對 <code>index.html</code> 按右鍵，選「Open with Live Server」；如果沒有這個選項，就直接在檔案上雙擊。確認畫面上出現你的名字和介紹。
+          </li>
+          <li>
+            <strong>加分題：用開發者工具看看標題。</strong>在網頁上你的標題文字按右鍵，選「檢查」，在 Elements 面板找到對應的那一行，看看它在 HTML 裡長什麼樣子。
+          </li>
+        </ol>
+
+        <details>
+          <summary>參考答案</summary>
+          <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+      &lt;html lang="zh-Hant-TW"&gt;
+      &lt;head&gt;
+          &lt;meta charset="UTF-8"&gt;
+          &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+          &lt;title&gt;王小明的自我介紹&lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+          &lt;h1&gt;王小明&lt;/h1&gt;
+          &lt;p&gt;我是行政部的同事，很高興認識大家，請多指教！&lt;/p&gt;
+      &lt;/body&gt;
+      &lt;/html&gt;</code></pre>
+        </details>
+
+        <details>
+          <summary>畫面沒出現？</summary>
+          <ul>
+            <li><strong>檔名不對：</strong>檔案可能變成 <code>index.html.txt</code>，或大小寫寫成 <code>Index.HTML</code>。請確認檔名是全部小寫的 <code>index.html</code>。</li>
+            <li><strong>忘了存檔：</strong>VS Code 標題的檔名旁如果有圓點，代表還沒存檔。按 <kbd>Ctrl</kbd> + <kbd>S</kbd>（Mac 是 <kbd>⌘</kbd> + <kbd>S</kbd>）再重新整理瀏覽器。</li>
+            <li><strong>沒有「Open with Live Server」選項：</strong>可能是 Live Server 還沒裝好。這時候直接在 <code>index.html</code> 上雙擊，用瀏覽器打開也可以，只是畫面不會自動更新。</li>
+          </ul>
+        </details>
+      </section>
+
+      <div class="read-mark" id="read-mark"></div>   <!-- site.js 填入「標記為已讀」 -->
+      <nav class="pager" id="pager" aria-label="上一篇與下一篇"></nav>  <!-- site.js 填入 -->
+    </main>
+    <aside class="toc" id="toc" aria-label="本頁目錄"></aside>   <!-- site.js 填入 -->
+  </div>
+  <script src="../assets/js/nav-data.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>
