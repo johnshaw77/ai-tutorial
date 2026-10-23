@@ -33,3 +33,12 @@
 - **Flexbox 只教四個屬性**（`display: flex`、`gap`、`justify-content`、`align-items`），不教 grid。
 - **試試看裡用色塊代替大頭照**：預覽框放不了讀者的圖片，用圓形 `div` 示範圓角與並排。
 - **「CSS 寫在哪裡」的三張卡不放程式碼**：一長串程式碼在窄卡片裡會斷成好幾行，改放白話說明，程式碼放在下面各自的小節。
+
+## 2026-10-23 第 5 章
+
+- **只教「看得懂、改得動」的一小組寫法**：`let`／`const`、雙引號文字、`+` 接字、具名 `function`、`addEventListener`、`getElementById` 搭配 `textContent`／`style`／`value`。`var`、箭頭函式、反引號樣板字串只在「跟 AI 一起做」提一句「看到認得就好」。代價是 AI 寫的程式常跟文章寫法不同，所以那一節教讀者請 AI 加註解、換成簡單寫法。
+- **不教迴圈、`Math.random`、`querySelector`、`innerHTML`、`classList`、`localStorage`**：留給實戰範例當場教（午餐抽籤用隨機、待辦清單用儲存）。陣列只教建立、編號從 0、`length`、`push`，給午餐抽籤範例用。
+- **多教了讀輸入框的 `.value`**（原規劃只有 `getElementById` 與 `textContent`）：部門聚餐報名表範例一定會用到，而且「輸入名字打招呼」比單純改字更像真的互動。
+- **切換狀態一律用 `if (isMorning) { isMorning = false; … } else { … }`**，不用 `!` 反轉：少一個新符號，練習和試試看的寫法一致。
+- **試試看不用 `alert`／`prompt`／`console.log`**：預覽框是 sandbox，彈出視窗會被擋並噴錯；結果一律寫到畫面上的元素。
+- **夜間模式加分題只換整頁背景、卡片維持白色**：若連卡片文字一起改成淺色，第 4 章做的淺藍色興趣標籤會變成淺字配淺底，看不清楚。
